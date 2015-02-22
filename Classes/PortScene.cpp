@@ -366,10 +366,9 @@ bool PortScene::init()
 	auto buyHouseButton = MenuItemImage::create("PortMain/image 217.png", "PortMain/image 219.png", CC_CALLBACK_1(PortScene::menuHandlingCallback, this));
 	buyHouseButton->setPosition(620, 432);
 
-	MenuItemSprite* settingButton = MenuItemImage::create("PortMain/image 81.png", "PortMain/image 81.png", CC_CALLBACK_1(PortScene::menuSettingCallback, this));
-	settingButton->setPosition(776, 28);
+	
 
-	auto menu = Menu::create(recordButton, allieButton, collectionButton, buyButton, furnitureButton, missionButton, buyHouseButton,settingButton, NULL);
+	auto menu = Menu::create(recordButton, allieButton, collectionButton, buyButton, furnitureButton, missionButton, buyHouseButton, NULL);
 	menu->setPosition(0, 0);
 	layer->addChild(menu);
 

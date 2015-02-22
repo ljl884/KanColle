@@ -25,7 +25,7 @@ CharacterInfo* XMLParser::loadCharacterInfo(std::string name)
 	{
 		
 		info->brokenType = normal;
-
+		info->star = 1;//TODO
 		info->id = node->FirstChildElement("id")->GetText();
 		info->nextId = node->FirstChildElement("nextId")->GetText();
 		info->resourceFolder = node->FirstChildElement("resource")->GetText();

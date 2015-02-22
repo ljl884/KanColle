@@ -50,7 +50,7 @@ public:
 	int level; 
 	int maxHP;//ÄÍ¾Ã
 	int currentHP;
-	int HP;
+	int star;
 	int firePower;//»ğÁ¦
 	int armour;//×°¼×
 	int torpedo;//À××°

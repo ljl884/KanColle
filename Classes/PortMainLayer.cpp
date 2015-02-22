@@ -15,16 +15,20 @@ void PortMainLayer::initLayer()
 	//furniture
 	floor = Sprite::create("furniture/floor/022.png");
 	floor->setPosition(400, 100);
+	floor->setZOrder(-2);
 	this->addChild(floor);
 	wall = Sprite::create("furniture/wall/001.png");
 	wall->setPosition(400, 285);
+	wall->setZOrder(-2);
 	this->addChild(wall);
+
+	//girl
+	setGirl("153DAFENG");
 
 	//buttons
 	initMenu();
 
-	//girl
-	setGirl("153DAFENG");
+	
 }
 
 void PortMainLayer::initMenu()
@@ -49,7 +53,11 @@ void PortMainLayer::initMenu()
 	auto factoryButton = MenuItemImage::create("PortMain/image 395.png", "PortMain/image 402.png", CC_CALLBACK_1(PortMainLayer::layerSelectCallback, this, LayerType::factory));
 	factoryButton->setPosition(300, 110);
 
-	auto menu = Menu::create(organizeButton, repairButton, factoryButton, battleButton, supplyButton, remodeButton, NULL);
+	MenuItemSprite* settingButton = MenuItemImage::create("PortMain/image 81.png", "PortMain/image 81.png", CC_CALLBACK_1(PortScene::menuSettingCallback, parent));
+	settingButton->setPosition(776, 28);
+
+
+	auto menu = Menu::create(organizeButton, repairButton, factoryButton, battleButton, supplyButton, remodeButton,settingButton, NULL);
 	menu->setPosition(0, 0);
 	this->addChild(menu);
 
@@ -97,6 +105,7 @@ void PortMainLayer::setGirl(std::string resource)
 	girl->setTexture("Character/" + resource + "/image 17.png");
 	this->addChild(girl);
 	girl->setPosition(600, 0);
+	girl->setZOrder(-1);
 	girl->runAction(RepeatForever::create((ActionInterval*)Sequence::create(ScaleTo::create(4, 1.02), ScaleTo::create(4, 1), NULL)));
 }
 void  PortMainLayer::menuCallback(Ref* pSender)

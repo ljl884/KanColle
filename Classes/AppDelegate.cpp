@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "GameScene.h"
 #include "PortScene.h"
+#include "GameStartScene.h"
 #include "BattleModel.h"
 USING_NS_CC;
 
@@ -47,9 +48,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	// setRandomSeed();
 	//auto model = new BattleModel();
 	//auto scene = new GameScene(model);
-	auto pscene = PortScene::createScene();
+	//auto pscene = PortScene::createScene();
+	auto sscene = new GameStartScene();
     // run
-    director->runWithScene(pscene);
+    director->runWithScene(sscene);
 
     return true;
 }

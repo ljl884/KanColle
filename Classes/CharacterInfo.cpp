@@ -13,10 +13,10 @@ CharacterInfo* CharacterInfo::makeDefaultInfo(std::string resource)
 	info->antisubmarine = 20;
 	info->capacity = 0;
 	info->firePower = 10;
-	info->HP = 15;
 	info->currentHP = 15;
 	info->maxHP = 15;
 	info->armour = 23;
+	info->star = 1;
 	info->nameCH = "Fubuki";
 	info->id = "011";
 	info->type = DD;
@@ -43,9 +43,9 @@ CharacterInfo* CharacterInfo::makeDefaultEnemyInfo()
 	info->antisubmarine = 0;
 	info->capacity = 130;
 	info->firePower = 90;
-	info->HP = 50;
 	info->currentHP = 50;
 	info->maxHP = 50;
+	info->star = 1;
 	info->id = "bfqj";
 	info->type = BB;
 	info->level = 1;
