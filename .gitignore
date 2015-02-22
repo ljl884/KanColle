@@ -1,3 +1,7 @@
+# Multi Platform Project Folder
+proj.android/
+proj.ios_mac/
+proj.win32/
 # Compiled Object files
 *.slo
 *.lo
