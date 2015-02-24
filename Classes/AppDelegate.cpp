@@ -3,7 +3,10 @@
 #include "PortScene.h"
 #include "GameStartScene.h"
 #include "BattleModel.h"
+#include "GameModel.h"
 USING_NS_CC;
+
+#define DEBUG_MODE true
 
 AppDelegate::AppDelegate() {
 
@@ -45,13 +48,27 @@ bool AppDelegate::applicationDidFinishLaunching() {
     FileUtils::getInstance()->addSearchPath("res");
 
     // create a scene. it's an autorelease object
-	// setRandomSeed();
-	//auto model = new BattleModel();
-	//auto scene = new GameScene(model);
-	//auto pscene = PortScene::createScene();
-	auto sscene = new GameStartScene();
+	
+
+	GameModel::getInstance()->setupInitData();
+
+	if (DEBUG_MODE){
+		auto s = PortScene::createScene();
+		s->setCurrentLayer(organize);
+		director->runWithScene(s);
+
+	}
+	else{
+		// setRandomSeed();
+		//auto model = new BattleModel();
+		//auto scene = new GameScene(model);
+		//auto pscene = PortScene::createScene();
+		auto sscene = new GameStartScene();
+		director->runWithScene(sscene);
+	}
+
     // run
-    director->runWithScene(sscene);
+   
 
     return true;
 }
