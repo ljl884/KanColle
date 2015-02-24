@@ -10,6 +10,7 @@ OrganizeContainer::OrganizeContainer(PortOrganizeLayer * parent, int index)
 	if (index<0 || index>NUMBER_OF_CONTAINERS)
 		return;
 	this->parent = parent;
+	this->Index = index;
 	bg = Sprite::create("OrganizeMain/image 221.png");
 	this->addChild(bg);
 	parent->addChild(this);
@@ -35,6 +36,11 @@ OrganizeContainer::OrganizeContainer(PortOrganizeLayer * parent, int index)
 	expBar->setPosition(78, -8);
 	this->addChild(expBar);
 
+	//hp
+	hpBar = new HpBar(1, 1);
+	hpBar->setPosition(-45, 13);
+	this->addChild(hpBar);
+
 	//menu
 
 	
@@ -48,22 +54,26 @@ OrganizeContainer::OrganizeContainer(PortOrganizeLayer * parent, int index)
 	this->addChild(menu);
 
 	//context
-	characterImage = Sprite::create();
+	/*characterImage = Sprite::create();
 	characterImage->setPosition(78, 20);
-	addChild(this->characterImage);
-	name = Label::create("", "fonts/STXINWEI.ttf", 25);
+	addChild(this->characterImage);*/
+	card = new CharacterCard();
+	card->setPosition(78, 20);
+	addChild(card);
+
+	name = Label::create("", "fonts/DengXian.ttf", 25);
 	name->setPosition(-120, 22);
-	level = Label::create("", "fonts/STXINWEI.ttf", 18);
+	level = Label::create("", "fonts/DengXian.ttf", 18);
 	level->setPosition(-23, 30);
-	HP = Label::create("", "fonts/STXINWEI.ttf", 10);
+	HP = Label::create("", "fonts/DengXian.ttf", 10);
 	HP->setPosition(-25, 0);
-	firePower = Label::create("", "fonts/STXINWEI.ttf", 15);
+	firePower = Label::create("", "fonts/DengXian.ttf", 15);
 	firePower->setPosition(-95, -15);
-	antiaircraft = Label::create("", "fonts/STXINWEI.ttf", 15);
+	antiaircraft = Label::create("", "fonts/DengXian.ttf", 15);
 	antiaircraft->setPosition(-20, -15);
-	torpedo = Label::create("", "fonts/STXINWEI.ttf", 15);
+	torpedo = Label::create("", "fonts/DengXian.ttf", 15);
 	torpedo->setPosition(-95, -35);
-	armour = Label::create("", "fonts/STXINWEI.ttf", 15);
+	armour = Label::create("", "fonts/DengXian.ttf", 15);
 	armour->setPosition(-20, -35);
 	addChild(name);
 	addChild(level);
@@ -80,9 +90,22 @@ OrganizeContainer::OrganizeContainer(PortOrganizeLayer * parent, int index)
 }
 void OrganizeContainer::updateCharacterInfo(CharacterInfo* info)
 {
-	characterImage->setTexture("Character/" + info->resourceFolder + "/image 1.png");
-	if (Sprite::create("Character/" + info->resourceFolder + "/image 1.png") == nullptr)
-		characterImage->setTexture("Character/" + info->resourceFolder + "/image 1.jpg");
+	
+	/*if (info->brokenType == BrokenType::normal || info->brokenType == BrokenType::tiny)
+	{
+		characterImage->setTexture("Character/" + info->resourceFolder + "/image 1.png");
+		if (Sprite::create("Character/" + info->resourceFolder + "/image 1.png") == nullptr)
+			characterImage->setTexture("Character/" + info->resourceFolder + "/image 1.jpg");
+	}
+		
+	else
+	{
+		characterImage->setTexture("Character/" + info->resourceFolder + "/image 3.png");
+		if (Sprite::create("Character/" + info->resourceFolder + "/image 3.png") == nullptr)
+			characterImage->setTexture("Character/" + info->resourceFolder + "/image 3.jpg");
+	}*/
+	card->updateCharacter(info->resourceFolder, info->brokenType);
+	
 
 	firePower->setString(Helper::int2str(info->firePower));
 	torpedo->setString(Helper::int2str(info->torpedo));
@@ -91,7 +114,7 @@ void OrganizeContainer::updateCharacterInfo(CharacterInfo* info)
 	name->setString(info->nameCH);
 	level->setString(Helper::int2str(info->level));
 	HP->setString(Helper::int2str(info->currentHP) + "/" + Helper::int2str(info->maxHP));
-	
+	hpBar->setHp(info->maxHP, info->currentHP);
 	if (name->getContentSize().width>80)
 		name->setScaleX(0.8);
 	else name->setScaleX(1);
@@ -100,6 +123,12 @@ void OrganizeContainer::updateCharacterInfo(CharacterInfo* info)
 	
 }
 void OrganizeContainer::detailCallback(Ref* pSender)
-{}
+{
+	parent->setSelectedShipIndex(Index);
+	parent->showDetail(Index);
+}
 void OrganizeContainer::changeCallback(Ref* pSender)
-{}
+{
+	parent->setSelectedShipIndex(Index);
+	parent->showList(Index);
+}

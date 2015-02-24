@@ -15,7 +15,7 @@ public:
 	virtual void stepBack(float delay);
 	virtual float showAttackingAnime(float delay);
 protected:
-	virtual void setBroken(BrokenType type);
+	
 	virtual void updateInformationBoard();
 	
 

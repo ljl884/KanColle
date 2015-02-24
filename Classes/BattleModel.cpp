@@ -1,5 +1,29 @@
 #include "BattleModel.h"
 
+BattleModel::BattleModel(Fleet* allies, Fleet* enemy, FormationType alliesFormation, FormationType enemyFormation)
+{
+	for (int i = 0; i < allies->size(); i++)
+		this->allies.push_back(allies->getShip(i));
+
+	CharacterInfo *einfo = XMLParser::getInstance()->loadCharacterInfo("BeiFangQiJi");
+	this->enemy.push_back(einfo);
+	CharacterInfo *einfo2 = XMLParser::getInstance()->loadCharacterInfo("RU");
+	this->enemy.push_back(einfo2);
+	CharacterInfo *einfo3 = XMLParser::getInstance()->loadCharacterInfo("RU");
+	this->enemy.push_back(einfo3);
+	CharacterInfo *einfo4 = XMLParser::getInstance()->loadCharacterInfo("RU");
+	this->enemy.push_back(einfo4);
+	CharacterInfo *einfo5 = XMLParser::getInstance()->loadCharacterInfo("RU");
+	this->enemy.push_back(einfo5);
+	CharacterInfo *einfo6 = XMLParser::getInstance()->loadCharacterInfo("RU");
+	this->enemy.push_back(einfo6);
+
+	this->alliesFormation = alliesFormation;
+	this->enemyFormation = enemyFormation;
+	tword = FanHang;
+	resetFireBattle();
+
+}
 BattleModel::BattleModel()
 {
 	

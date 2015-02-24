@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "CharacterInfo.h"
 #include "XMLParser.h"
+#include "GameModel.h"	
 
 using namespace cocos2d;
 enum FormationType{
@@ -36,6 +37,7 @@ enum Air_Control{
 class BattleModel{
 public:
 	BattleModel();
+	BattleModel(Fleet* allies, Fleet* enemy, FormationType alliesFormation, FormationType enemyFormation);
 	//Ë÷µÐ
 
 	//º½¿ÕÕ½

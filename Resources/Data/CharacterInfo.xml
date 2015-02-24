@@ -72,6 +72,78 @@
     <ammoConsume>300</ammoConsume>
     <steelConsume>10</steelConsume>
   </Character>
+  <Character name="Bismarck">
+    <id>171</id>
+    <nextId>172</nextId>
+    <name>Bismarck</name>
+    <nameCH>Bismarck</nameCH>
+    <type>BB</type>
+    <resource>171Bismarck</resource>
+    <level>1</level>
+    <maxHP>90</maxHP>
+    <firePower>64</firePower>
+    <armour>67</armour>
+    <torpedo>0</torpedo>
+    <agility>33</agility>
+    <antiaircraft>18</antiaircraft>
+    <capacity>16</capacity>
+    <antisubmarine>0</antisubmarine>
+    <speed>high</speed>
+    <scout>16</scout>
+    <range>long</range>
+    <luck>8</luck>
+    <fuelConsume>90</fuelConsume>
+    <ammoConsume>110</ammoConsume>
+    <steelConsume>90</steelConsume>
+  </Character>
+  <Character name="大凤">
+    <id>153</id>
+    <nextId>156</nextId>
+    <name>DaFeng</name>
+    <nameCH>大凤</nameCH>
+    <type>CVA</type>
+    <resource>153DAFENG</resource>
+    <level>1</level>
+    <maxHP>67</maxHP>
+    <firePower>0</firePower>
+    <armour>40</armour>
+    <torpedo>0</torpedo>
+    <agility>33</agility>
+    <antiaircraft>42</antiaircraft>
+    <capacity>61</capacity>
+    <antisubmarine>0</antisubmarine>
+    <speed>high</speed>
+    <scout>47</scout>
+    <range>short</range>
+    <luck>2</luck>
+    <fuelConsume>50</fuelConsume>
+    <ammoConsume>50</ammoConsume>
+    <steelConsume>50</steelConsume>
+  </Character>
+  <Character name="大凤改">
+    <id>156</id>
+    <nextId>156</nextId>
+    <name>DaFengGai</name>
+    <nameCH>大凤改</nameCH>
+    <type>CVA</type>
+    <resource>156DAFENGGAI</resource>
+    <level>40</level>
+    <maxHP>70</maxHP>
+    <firePower>0</firePower>
+    <armour>44</armour>
+    <torpedo>0</torpedo>
+    <agility>34</agility>
+    <antiaircraft>45</antiaircraft>
+    <capacity>86</capacity>
+    <antisubmarine>0</antisubmarine>
+    <speed>high</speed>
+    <scout>50</scout>
+    <range>short</range>
+    <luck>4</luck>
+    <fuelConsume>50</fuelConsume>
+    <ammoConsume>50</ammoConsume>
+    <steelConsume>50</steelConsume>
+  </Character>
   <Character name="吹雪">
     <id>011</id>
     <nextId>011b</nextId>
@@ -120,6 +192,30 @@
     <ammoConsume>20</ammoConsume>
     <steelConsume>5</steelConsume>
   </Character>
+  <Character name="武藏改">
+    <id>148</id>
+    <nextId>148</nextId>
+    <name>WuZangGai</name>
+    <nameCH>武藏改</nameCH>
+    <type>BB</type>
+    <resource>148WUZANGGAI</resource>
+    <level>40</level>
+    <maxHP>97</maxHP>
+    <firePower>92</firePower>
+    <armour>92</armour>
+    <torpedo>0</torpedo>
+    <agility>27</agility>
+    <antiaircraft>60</antiaircraft>
+    <capacity>28</capacity>
+    <antisubmarine>0</antisubmarine>
+    <speed>low</speed>
+    <scout>18</scout>
+    <range>exlong</range>
+    <luck>9</luck>
+    <fuelConsume>250</fuelConsume>
+    <ammoConsume>325</ammoConsume>
+    <steelConsume>300</steelConsume>
+  </Character>
   <Character name="加贺改">
     <id>007b</id>
     <nextId>007b</nextId>
@@ -144,6 +240,30 @@
     <ammoConsume>80</ammoConsume>
     <steelConsume>10</steelConsume>
   </Character>
+  <Character name="赤城改">
+    <id>006b</id>
+    <nextId>006b</nextId>
+    <name>ChiChengGai</name>
+    <nameCH>赤城改</nameCH>
+    <type>CV</type>
+    <resource>277CHICHENGGAI</resource>
+    <level>30</level>
+    <maxHP>77</maxHP>
+    <firePower>6</firePower>
+    <armour>45</armour>
+    <torpedo>0</torpedo>
+    <agility>40</agility>
+    <antiaircraft>41</antiaircraft>
+    <capacity>82</capacity>
+    <antisubmarine>0</antisubmarine>
+    <speed>high</speed>
+    <scout>61</scout>
+    <range>short</range>
+    <luck>12</luck>
+    <fuelConsume>75</fuelConsume>
+    <ammoConsume>75</ammoConsume>
+    <steelConsume>75</steelConsume>
+  </Character>
   <Character name="伊19">
     <id>123</id>
     <nextId>123b</nextId>
@@ -165,6 +285,30 @@
     <range>short</range>
     <luck>12</luck>
     <fuelConsume>10</fuelConsume>
+    <ammoConsume>20</ammoConsume>
+    <steelConsume>10</steelConsume>
+  </Character>
+  <Character name="时津风改">
+    <id>186b</id>
+    <nextId>186b</nextId>
+    <name>ShiJinFengGai</name>
+    <nameCH>伊时津风改</nameCH>
+    <type>DD</type>
+    <resource>322SHIJINFENGGAI</resource>
+    <level>30</level>
+    <maxHP>32</maxHP>
+    <firePower>12</firePower>
+    <armour>14</armour>
+    <torpedo>28</torpedo>
+    <agility>44</agility>
+    <antiaircraft>10</antiaircraft>
+    <capacity>0</capacity>
+    <antisubmarine>26</antisubmarine>
+    <speed>high</speed>
+    <scout>8</scout>
+    <range>short</range>
+    <luck>12</luck>
+    <fuelConsume>15</fuelConsume>
     <ammoConsume>20</ammoConsume>
     <steelConsume>10</steelConsume>
   </Character>

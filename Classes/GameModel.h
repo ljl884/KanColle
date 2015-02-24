@@ -14,12 +14,16 @@ public:
 		return instance;
 	}
 	Fleet* getFleet(int index);
+	inline std::vector<CharacterInfo*> getAllShips(){ return allShips; }
+	int getShipId();
+	void setupInitData();
 
 private:
 	GameModel();
 	static GameModel* instance;
 	std::vector<Fleet*> fleets;
 	std::vector<CharacterInfo*> allShips;
+	int nextShipId;
 
 };
 

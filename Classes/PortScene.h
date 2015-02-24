@@ -24,7 +24,7 @@ enum LayerType{
 };
 class PortScene : public Scene{
 public:
-	static Scene* createScene();
+	static PortScene* createScene();
 	void setCurrentLayer(LayerType type);
 	void menuSettingCallback(Ref* pSender);
 	void menuHandlingCallback(Ref* pSender);

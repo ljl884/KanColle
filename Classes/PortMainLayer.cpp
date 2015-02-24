@@ -114,7 +114,7 @@ void  PortMainLayer::menuCallback(Ref* pSender)
 }
 void PortMainLayer::battleCallback(Ref* pSender)
 {
-	auto model = new BattleModel();
+	auto model = new BattleModel(GameModel::getInstance()->getFleet(0),new Fleet(5),DanZong,LunXing);
 	auto scene = new GameScene(model);
 	Director::getInstance()->replaceScene(scene);
 }

@@ -3,14 +3,13 @@
 
 BattleCharacter::BattleCharacter()
 {
-	mainSprite = nullptr;
+
 	border = nullptr;
 	flagIcon = nullptr;
 	closeUp = nullptr;
-	brokenMark = nullptr;
-	shader = nullptr;
 	informationBoard = nullptr;
 	equipmentLabel = nullptr;
+	card = nullptr;
 	
 	
 
@@ -18,6 +17,7 @@ BattleCharacter::BattleCharacter()
 
 
 	hpBar = Sprite::create("BattleMain/image 430.png");
+	hpBar->setAnchorPoint(Point::ANCHOR_MIDDLE_BOTTOM);
 	maxHpLabel = Label::create();
 	currentHpLabel = Label::create();
 	maxHpLabel->setColor(Color3B::WHITE);
@@ -33,11 +33,7 @@ void BattleCharacter::setCurrentHp(int hp)
 	 persentage = (float)hp / (float)maxHp;
 
 	hpBar->setScaleY(persentage);
-	if (persentage > 0 && persentage < 1)
-	{
-		float distance = 0.5 * 40 * (1 - persentage);
-		hpBar->runAction(MoveBy::create(0.01, ccp(0, -distance)));
-	}
+
 	
 
 	if (persentage>0.75)
@@ -105,7 +101,7 @@ bool BattleCharacter::canAttack()
 
 Point BattleCharacter::getRealPosition()
 {
-	return this->mainSprite->getPosition();
+	return this->card->getPosition();
 }
 void BattleCharacter::showDamageAnime(float delay, bool miss, bool critical, int damage)
 {
@@ -115,36 +111,8 @@ void BattleCharacter::showDamageAnime(float delay, bool miss, bool critical, int
 void BattleCharacter::setBroken(BrokenType type)
 {
 	info->brokenType = type;
-	Point p = mainSprite->getPosition();
+	card->updateCharacter(this->resourceFolder, type);
 
-	if (brokenMark!=nullptr)
-		delete brokenMark;
-	switch (type)
-	{
-	case BrokenType::tiny:
-		brokenMark = Sprite::create("commonAssets/image 344.png");
-		this->addChild(brokenMark);
-		brokenMark->setPosition(p);
-		break;
-	case BrokenType::mid:
-		brokenMark = Sprite::create("commonAssets/image 346.png");
-		this->addChild(brokenMark);
-		brokenMark->setPosition(p);
-		break;
-	case BrokenType::large:
-		brokenMark = Sprite::create("commonAssets/image 348.png");
-		this->addChild(brokenMark);
-		brokenMark->setPosition(p);
-		break;
-	case BrokenType::drown:
-		brokenMark = Sprite::create("commonAssets/image 350.png");
-		mainSprite->setColor(Color3B(90, 90, 96));//GRAY
-		this->addChild(brokenMark);
-		brokenMark->setPosition(p);
-		break;
-	default:
-		break;
-	}
 }
 float BattleCharacter::receiveDamage(float delay, bool miss, bool critical, int damage,int explodeTimes)
 {

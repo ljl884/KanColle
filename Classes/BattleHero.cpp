@@ -35,19 +35,11 @@ BattleHero* BattleHero::create(std::string name, Node *parent, int row)
 bool BattleHero::init(std::string name, Node *parent, int row){
 	this->parent = parent;
 	parent->addChild(this);
-	this->name = name;
-	mainSprite = Sprite::create("Character/" + name + "/image 1.png");
-	useJpg = false;
-	if (mainSprite == nullptr)
-	{
-		mainSprite = Sprite::create("Character/" + name + "/image 1.jpg");
-		useJpg = true;
-	}
-		
-	if (mainSprite == nullptr)
-		return false;
-	this->addChild(mainSprite);
-	hpBar->setPosition(163, 411 - 41 * row);
+	this->resourceFolder = name;
+	card = new CharacterCard(name);
+
+	this->addChild(card);
+	hpBar->setPosition(163, 391 - 41 * row);
 	this->addChild(hpBar);
 	if (row == 1)
 	{
@@ -61,7 +53,7 @@ bool BattleHero::init(std::string name, Node *parent, int row){
 		border = Sprite::create("BattleMain/image 437.png");
 	border->setPosition(84, 413 - 41 * row);
 	this->addChild(border);
-	mainSprite->setPosition(80, 410 - 41 * row);
+	card->setPosition(80, 410 - 41 * row);
 
 	currentHpLabel->setPosition(180, 410 - 41 *row);
 	maxHpLabel->setPosition(197, 410 - 41 * row);
@@ -80,7 +72,7 @@ float BattleHero::showCloseUp(float delay)
 {
 	if (closeUp == nullptr)
 	{
-		closeUp = Sprite::create("Character/" + name + "/image 9.png");
+		closeUp = Sprite::create("Character/" + resourceFolder + "/image 9.png");
 		parent->addChild(closeUp);
 		closeUp->setZOrder(3);
 		closeUp->setScale(0.8);
@@ -94,7 +86,7 @@ float BattleHero::showCloseUp(float delay)
 float BattleHero::showAttackingAnime(float delay){
 	if (closeUp == nullptr)
 	{
-		closeUp = Sprite::create("Character/" + name + "/image 9.png");
+		closeUp = Sprite::create("Character/" + resourceFolder + "/image 9.png");
 		parent->addChild(closeUp);
 		closeUp->setZOrder(3);
 		//closeUp->setScale(0.8);
@@ -130,12 +122,6 @@ void BattleHero::updateInformationBoard()
 		informationBoard->setPosition(200, 70);
 		informationBoard->setZOrder(4);
 
-	//	firePowerLabel = Label::createWithTTF("", "fonts/STXINWEI.ttf", 20);
-		//torpedoLabel = Label::createWithTTF("", "fonts/STXINWEI.ttf", 20);
-		//antiaircraftLabel = Label::createWithTTF("", "fonts/STXINWEI.ttf", 20);
-		//armourLabel = Label::createWithTTF("", "fonts/STXINWEI.ttf", 20);
-		//nameLabel = Label::createWithTTF("", "fonts/STXINWEI.ttf", 35);
-		//levelLabel = Label::createWithTTF("", "fonts/STXINWEI.ttf", 25);
 
 		firePowerLabel = Label::create("","fonts/STXINWEI.ttf",20);
 		torpedoLabel = Label::create("", "fonts/STXINWEI.ttf", 20);
@@ -179,68 +165,4 @@ void BattleHero::updateInformationBoard()
 	informationBoard->setOpacity(0);
 }
 
-void BattleHero::setBroken(BrokenType type)
-{
-	info->brokenType = type;
-	if (brokenMark != nullptr)
-		delete brokenMark;
-	if (shader != nullptr)
-		delete shader;
-	Point p = mainSprite->getPosition();
-	
-	switch (type)
-	{
-	case BrokenType::tiny:
-		brokenMark = Sprite::create("commonAssets/image 344.png");
-		this->addChild(brokenMark);
-		brokenMark->setPosition(p);
 
-		shader = Sprite::create("commonAssets/image 367.png");
-		shader->setPosition(p);
-		this->addChild(shader);
-		break;
-	case BrokenType::mid:
-		brokenMark = Sprite::create("commonAssets/image 346.png");
-		if (useJpg)
-			mainSprite->setTexture("Character/" + name + "/image 3.jpg");
-		else
-			mainSprite->setTexture("Character/" + name + "/image 3.png");
-		
-		this->addChild(brokenMark);
-		brokenMark->setPosition(p);
-
-		shader = Sprite::create("commonAssets/image 369.png");
-		shader->setPosition(p);
-		this->addChild(shader);
-		break;
-	case BrokenType::large:
-		brokenMark = Sprite::create("commonAssets/image 348.png");
-		if (useJpg)
-			mainSprite->setTexture("Character/" + name + "/image 3.jpg");
-		else
-			mainSprite->setTexture("Character/" + name + "/image 3.png");
-		this->addChild(brokenMark);
-		brokenMark->setPosition(p);
-
-		shader = Sprite::create("commonAssets/image 371.png");
-		shader->setPosition(p);
-		this->addChild(shader);
-		break;
-	case BrokenType::drown:
-		brokenMark = Sprite::create("commonAssets/image 350.png");
-		if (useJpg)
-			mainSprite->setTexture("Character/" + name + "/image 3.jpg");
-		else
-			mainSprite->setTexture("Character/" + name + "/image 3.png");
-		mainSprite->setColor(Color3B(90,90,96));//GRAY
-		this->addChild(brokenMark);
-		brokenMark->setPosition(p);
-
-		shader = Sprite::create("commonAssets/image 371.png");
-		shader->setPosition(p);
-		this->addChild(shader);
-		break;
-	default:
-		break;
-	}
-}

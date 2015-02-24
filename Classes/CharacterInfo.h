@@ -9,7 +9,8 @@ enum Shooting_Range{
 	range_long,
 	range_mid,
 	range_short,
-	range_exlong
+	range_exlong,
+	range_non
 };
 enum Ship_Type{
 	DD,//驱逐
@@ -19,6 +20,7 @@ enum Ship_Type{
 	CAV,//航空巡洋舰
 	BB,//战列舰
 	CV,//正规航母
+	CVA,//装甲空母
 	CVL,//轻航母
 	AV,//水上机母
 	SS,//潜艇
@@ -37,6 +39,8 @@ enum BrokenType
 };
 class CharacterInfo{
 public:
+	CharacterInfo();
+	int inGameId; //创建时由GameModel分配 游戏唯一
 
 	static CharacterInfo* makeDefaultInfo();
 	static CharacterInfo* makeDefaultInfo(std::string resource);
@@ -45,6 +49,7 @@ public:
 	std::string name;
 	std::string nameCH; //chinese character name
 	std::string resourceFolder;
+
 	Ship_Type type;
 	BrokenType brokenType;
 	int level; 
@@ -74,6 +79,8 @@ public:
 	Equipment *equipment2;
 	Equipment *equipment3;
 	Equipment *equipment4;
+
+	int currentFleet;
 	
 };
 #endif

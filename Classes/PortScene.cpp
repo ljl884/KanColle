@@ -7,7 +7,7 @@
 #include "PortRepairLayer.h"
 #include "PortSupplyLayer.h"
 #include "LayerSelecter.h"
-Scene* PortScene::createScene()
+PortScene* PortScene::createScene()
 {
 	auto *scene = new PortScene();
 	return scene;

@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 #include "CharacterInfo.h"
 #include "Stars.h"
+#include "HpBar.h"
+#include "CharacterCard.h"
 #define NUMBER_OF_CONTAINERS 6
 
 using namespace cocos2d;
@@ -14,6 +16,7 @@ class OrganizeContainer:public Node{
 public:
 	OrganizeContainer(PortOrganizeLayer * parent,int index);
 	void updateCharacterInfo(CharacterInfo* info);
+	
 	void detailCallback(Ref* pSender);
 	void changeCallback(Ref* pSender);
 private:
@@ -25,7 +28,9 @@ private:
 	MenuItemImage * detailButton;
 	MenuItemImage * changeButton;
 
+	CharacterCard * card;
 	Sprite * characterImage;
+	HpBar *hpBar;
 	Label * name;
 	Label * level;
 	Label * HP;

@@ -1,5 +1,9 @@
 #include "CharacterInfo.h"
-
+#include "GameModel.h"
+CharacterInfo::CharacterInfo()
+{
+	this->inGameId = GameModel::getInstance()->getShipId();
+}
 CharacterInfo* CharacterInfo::makeDefaultInfo()
 {
 	return makeDefaultInfo("009CHUIXUE");
@@ -30,6 +34,8 @@ CharacterInfo* CharacterInfo::makeDefaultInfo(std::string resource)
 	info->scout = 5;
 	info->torpedo = 27;
 	info->speed = high;
+
+	info->currentFleet = 0;
 	return info;
 }
 
@@ -59,5 +65,6 @@ CharacterInfo* CharacterInfo::makeDefaultEnemyInfo()
 	info->scout = 5;
 	info->torpedo = 27;
 	info->speed = high;
+
 	return info;
 }

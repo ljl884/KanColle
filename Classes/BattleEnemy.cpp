@@ -25,18 +25,10 @@ BattleEnemy* BattleEnemy::create(CharacterInfo *info, Node *parent, int row)
 bool BattleEnemy::init(std::string name, Node *parent, int row){
 	parent->addChild(this);
 	this->parent = parent;
-	this->name = name;
-	mainSprite = Sprite::create("Enemy/" + name + "/image 1.png");
-	
-	if (mainSprite == nullptr){
-		mainSprite = Sprite::create("Enemy/" + name + "/image 1.jpg");
-		useJpg = false;
-	}
-		
-	if (mainSprite == nullptr)
-		return false;
-	this->addChild(mainSprite);
-	hpBar->setPosition(635, 361 - 41 * row);
+	this->resourceFolder = name;
+	card = new CharacterCard(true, name);
+	this->addChild(card);
+	hpBar->setPosition(635, 341 - 41 * row);
 	this->addChild(hpBar);
 	if (row == 1)
 	{
@@ -49,7 +41,7 @@ bool BattleEnemy::init(std::string name, Node *parent, int row){
 		border = Sprite::create("BattleMain/image 444.png");
 	border->setPosition(714, 363 - 41 * row);
 	this->addChild(border);
-	mainSprite->setPosition(718, 360 - 41 * row);
+	card->setPosition(718, 360 - 41 * row);
 	
 
 	currentHpLabel->setPosition(602, 360 - 41 * row);
@@ -65,7 +57,7 @@ bool BattleEnemy::init(std::string name, Node *parent, int row){
 float BattleEnemy::showAttackingAnime(float delay){
 	if (closeUp == nullptr)
 	{
-		closeUp = Sprite::create("Enemy/" + name + "/image 3.png");
+		closeUp = Sprite::create("Enemy/" + resourceFolder + "/image 3.png");
 		parent->addChild(closeUp);
 		closeUp->setZOrder(3);
 		//closeUp->setScale(0.8);
@@ -78,11 +70,11 @@ float BattleEnemy::showAttackingAnime(float delay){
 }
 void BattleEnemy::apearAnimation()
 {
-	Color3B col = mainSprite->getColor();
+	Color3B col = card->getColor();
 	FiniteTimeAction *tinto = TintTo::create(1.5, Color3B(242,75,75));
 	FiniteTimeAction *tinback = TintTo::create(1.2, col);
 	Sequence *seq = Sequence::create(tinto, tinback, NULL);
-	mainSprite->runAction(seq);
+	card->runAction(seq);
 
 	FiniteTimeAction *fadeIn = FadeIn::create(1);
 	border->setOpacity(0);
@@ -146,11 +138,6 @@ void BattleEnemy::setCurrentHp(int hp)
 		persentage = (float)hp / (float)maxHp;
 
 	hpBar->setScaleY(persentage);
-	if (persentage > 0 && persentage < 1)
-	{
-		float distance = 0.5 * 40 * (1 - persentage);
-		hpBar->runAction(MoveBy::create(0.01, ccp(0, -distance+3)));
-	}
 
 
 	if (persentage>0.75)

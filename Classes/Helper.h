@@ -2,16 +2,17 @@
 #define _HELPER_
 
 #include "cocos2d.h"
+#include "XMLParser.h"
+
+enum Ship_Type;
 
 class Helper{
 public:
-	static std::string int2str(int &i) {
-		std::string s;
-		std::stringstream ss(s);
-		ss << i;
-
-		return ss.str();
-	}
+	static std::string int2str(int &i);
+	static std::string getString(std::string name);
+	static std::string getShipType(Ship_Type type);
 };
+
+
 
 #endif

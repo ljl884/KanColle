@@ -5,6 +5,7 @@
 #include "CharacterInfo.h"
 #include "BattleBar.h"
 #include "AnimationMaker.h"
+#include "CharacterCard.h"
 using namespace cocos2d;
 
 
@@ -29,12 +30,12 @@ protected:
 	inline void setInfo(CharacterInfo *info){ this->info = info; }
 	inline CharacterInfo* getInfo(CharacterInfo *info){ return this->info; }
 
-	Sprite * mainSprite;
+	CharacterCard * card;
+
 	Sprite * border;
 	Sprite * hpBar;
 	Sprite * flagIcon;
 	Sprite * closeUp;
-	Sprite * brokenMark;
 
 	BattleBar * battleBar;
 	Sprite* equipmentLabel;
@@ -58,10 +59,8 @@ protected:
 	Label *currentHpLabel;
 	int maxHp;
 	int currentHp;
-	std::string name;
+	std::string resourceFolder;
 	Node * parent;
-	bool useJpg;
-	Sprite *shader;
 
 
 public:
