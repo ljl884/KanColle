@@ -6,7 +6,7 @@ Fleet::Fleet(int FleetNumber)
 }
 
 bool Fleet::addShip(CharacterInfo* newShip){
-	if (ships.size() > 6)
+	if (ships.size() > MAX_SHIPS_PER_FLEET)
 		return false;
 	ships.push_back(newShip);
 	newShip->currentFleet = FleetNumber;

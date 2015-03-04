@@ -30,11 +30,10 @@ void BattleCharacter::setCurrentHp(int hp)
 	currentHpLabel->setString(CCString::createWithFormat("%d", currentHp)->_string+"/");
 	float persentage = 0;
 	if (maxHp!=0)
-	 persentage = (float)hp / (float)maxHp;
+		persentage = (float)currentHp / (float)maxHp;
 
 	hpBar->setScaleY(persentage);
 
-	
 
 	if (persentage>0.75)
 	{
@@ -66,11 +65,12 @@ void BattleCharacter::setMaxHp(int hp)
 		ThreeDigitMode();
 	this->maxHp = hp;
 	this->maxHpLabel->setString(CCString::createWithFormat("%d", maxHp)->_string);
-	this->setCurrentHp(hp);
+	
 }
 void BattleCharacter::getDamage(int damage)
 {
-	int newHp = this->currentHp;
+	//int newHp = info->currentHP;
+	int newHp;
 	if (damage > 0)
 	{
 		newHp = this->currentHp - damage;
@@ -87,13 +87,13 @@ bool BattleCharacter::canAttack()
 {
 	if (info->type == CV || info->type == CVL)
 	{
-		float persentage = currentHp / maxHp;
+		float persentage = info->currentHP / info->maxHP;
 		if (persentage <= 0.5)
 			return false;
 	}
 	
 	
-	if (currentHp == 0)
+	if (info->currentHP == 0)
 			return false;
 	
 	return true;
@@ -105,8 +105,9 @@ Point BattleCharacter::getRealPosition()
 }
 void BattleCharacter::showDamageAnime(float delay, bool miss, bool critical, int damage)
 {
-	auto callFunc = CallFunc::create(CC_CALLBACK_0(BattleCharacter::getDamage, this,damage));
-	AnimationMaker::playDamageNumberAnimation(this->getRealPosition(),this->parent, delay, miss, critical, damage,callFunc);
+	int receivedDamage = damage;
+	auto callFunc = CallFunc::create(CC_CALLBACK_0(BattleCharacter::getDamage, this, receivedDamage));
+	AnimationMaker::playDamageNumberAnimation(this->getRealPosition(), this->parent, delay, miss, critical, receivedDamage, callFunc);
 }
 void BattleCharacter::setBroken(BrokenType type)
 {

@@ -66,7 +66,7 @@ float BattleEnemy::showAttackingAnime(float delay){
 	AnimationMaker::FlyToPositionAndFadeOut(closeUp, delay,ccp(700,240),0.5);
 	updateInformationBoard();
 	informationBoard->runAction(Sequence::create(DelayTime::create(delay), FadeIn::create(0.05), DelayTime::create(0.5), FadeOut::create(0.3), NULL));
-	return 0;
+	return 0.85;
 }
 void BattleEnemy::apearAnimation()
 {
@@ -139,6 +139,7 @@ void BattleEnemy::setCurrentHp(int hp)
 
 	hpBar->setScaleY(persentage);
 
+	//setBroken(info->brokenType);
 
 	if (persentage>0.75)
 	{

@@ -1,17 +1,14 @@
 #ifndef _CHARACTER_INFO_
 #define _CHARACTER_INFO_
 #include "cocos2d.h"
+#include "Equipment.h"
+
+#define MAX_EQUIPMENT_NUMBER 4
 enum Ship_Speed{
 	high,
 	low
 };
-enum Shooting_Range{
-	range_long,
-	range_mid,
-	range_short,
-	range_exlong,
-	range_non
-};
+
 enum Ship_Type{
 	DD,//驱逐
 	CL,//轻巡洋舰
@@ -19,6 +16,7 @@ enum Ship_Type{
 	CLT,//重雷装巡洋舰
 	CAV,//航空巡洋舰
 	BB,//战列舰
+	BBCV,//航空战列舰
 	CV,//正规航母
 	CVA,//装甲空母
 	CVL,//轻航母
@@ -28,7 +26,7 @@ enum Ship_Type{
 	SUP//补给舰
 
 };
-class Equipment;
+
 enum BrokenType
 {
 	normal,
@@ -67,6 +65,8 @@ public:
 	int scout;//索敌
 	Shooting_Range range;//射程
 	int luck;//运
+	int bomb;//爆装
+	int hitRate;//命中
 
 	int fuelConsume; //燃料消耗
 	int ammoConsume; //弹药消耗
@@ -75,12 +75,17 @@ public:
 	std::string nextId;//下一改造id
 
 
-	Equipment *equipment1;
-	Equipment *equipment2;
-	Equipment *equipment3;
-	Equipment *equipment4;
-
+	
+	std::vector<Equipment*> equipments;
 	int currentFleet;
+
+public:
+	void addEquipment(Equipment* equipment,int index);
+	bool canAttack();
+	void getDamage(int damage);
+	Equipment* getMainCannon();   
+	bool canAirBattle();
+	bool getAirCraftId(std::string &plane1, std::string &plane2, std::string plane3);
 	
 };
 #endif

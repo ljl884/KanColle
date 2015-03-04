@@ -2,6 +2,7 @@
 proj.android/
 proj.ios_mac/
 proj.win32/
+bin/
 # Compiled Object files
 *.slo
 *.lo

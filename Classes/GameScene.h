@@ -12,11 +12,12 @@ using namespace cocos2d;
 enum BattleStatus{
 	start,
 	character,
-	scout,
+	scouting,
 	formation,
 	enemy,
 	airbattle,
-	firebattle
+	firebattle,
+	dayEnd
 };
 
 class GameScene : public Scene{
@@ -37,6 +38,7 @@ private:
 	void scoutResult();
 	void airBattle();
 	void fireBattle();
+	void dayEnd();
 
 	void nextStatus(float DelayTime);
 
@@ -46,7 +48,8 @@ private:	//Left Corner Bar
 		suodi,
 		paojizhan,
 		yezhan,
-		hangkongzhan
+		hangkongzhan,
+		lituopanding
 	};
 	void initLeftCornerBar();
 	void hideLeftCornerBar();
@@ -57,6 +60,8 @@ private:	//Left Corner Bar
 
 
 private:
+	Sprite* startBorderUp;
+	Sprite* startBorderDown;
 	BattleBar* battleBar;
 	BattleStatus status;
 	Formation *myFormation;

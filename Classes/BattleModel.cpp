@@ -1,7 +1,8 @@
 #include "BattleModel.h"
-
+#define DEFAULT_HIT_RATE 0.95
 BattleModel::BattleModel(Fleet* allies, Fleet* enemy, FormationType alliesFormation, FormationType enemyFormation)
 {
+
 	for (int i = 0; i < allies->size(); i++)
 		this->allies.push_back(allies->getShip(i));
 
@@ -9,13 +10,13 @@ BattleModel::BattleModel(Fleet* allies, Fleet* enemy, FormationType alliesFormat
 	this->enemy.push_back(einfo);
 	CharacterInfo *einfo2 = XMLParser::getInstance()->loadCharacterInfo("RU");
 	this->enemy.push_back(einfo2);
-	CharacterInfo *einfo3 = XMLParser::getInstance()->loadCharacterInfo("RU");
+	CharacterInfo *einfo3 = XMLParser::getInstance()->loadCharacterInfo("LI");
 	this->enemy.push_back(einfo3);
-	CharacterInfo *einfo4 = XMLParser::getInstance()->loadCharacterInfo("RU");
+	CharacterInfo *einfo4 = XMLParser::getInstance()->loadCharacterInfo("HO");
 	this->enemy.push_back(einfo4);
-	CharacterInfo *einfo5 = XMLParser::getInstance()->loadCharacterInfo("RU");
+	CharacterInfo *einfo5 = XMLParser::getInstance()->loadCharacterInfo("HO");
 	this->enemy.push_back(einfo5);
-	CharacterInfo *einfo6 = XMLParser::getInstance()->loadCharacterInfo("RU");
+	CharacterInfo *einfo6 = XMLParser::getInstance()->loadCharacterInfo("DO");
 	this->enemy.push_back(einfo6);
 
 	this->alliesFormation = alliesFormation;
@@ -53,109 +54,123 @@ BattleModel::BattleModel()
 	CharacterInfo *einfo6 = XMLParser::getInstance()->loadCharacterInfo("RU");
 	this->enemy.push_back(einfo6);
 	
-	/*
-	CharacterInfo *info = CharacterInfo::makeDefaultInfo("278JIAHEGAI");
-	this->allies.push_back(info);
-	CharacterInfo *info2 = CharacterInfo::makeDefaultInfo("003NAKE");
-	this->allies.push_back(info2);
-	CharacterInfo *info3 = CharacterInfo::makeDefaultInfo("191YI19");
-	this->allies.push_back(info3);
-	CharacterInfo *info4 = CharacterInfo::makeDefaultInfo("144XILIGAIER");
-	this->allies.push_back(info4);
-	CharacterInfo *info5 = CharacterInfo::makeDefaultInfo("067AIDANG");
-	this->allies.push_back(info5);
-	CharacterInfo *info6 = CharacterInfo::makeDefaultInfo("009CHUIXUE");
-	this->allies.push_back(info6);
-	
-	CharacterInfo *einfo = CharacterInfo::makeDefaultEnemyInfo();
-	this->enemy.push_back(einfo);
-	CharacterInfo *einfo2 = CharacterInfo::makeDefaultEnemyInfo();
-	this->enemy.push_back(einfo2);
-	CharacterInfo *einfo3 = CharacterInfo::makeDefaultEnemyInfo();
-	this->enemy.push_back(einfo3);
-	CharacterInfo *einfo4 = CharacterInfo::makeDefaultEnemyInfo();
-	this->enemy.push_back(einfo4);
-	CharacterInfo *einfo5 = CharacterInfo::makeDefaultEnemyInfo();
-	this->enemy.push_back(einfo5);
-	CharacterInfo *einfo6 = CharacterInfo::makeDefaultEnemyInfo();
-	this->enemy.push_back(einfo6);
-	*/
 	alliesFormation = DanZong;
 	enemyFormation = LunXing;
 	tword = FanHang;
 	resetFireBattle();
 }
+void BattleModel::insertToRangeVector(Shooting_Range range, int i)
+{
+	switch (range)
+	{
+	case Shooting_Range::range_exlong:
+		if (i>10)
+			exlongIndex.insert(exlongIndex.begin(), i);
+		else
+			exlongIndex.insert(exlongIndex.end(), i);
+		break;
+	case Shooting_Range::range_long:
+		if (i>10)
+			longIndex.insert(longIndex.begin(), i);
+		else
+			longIndex.insert(longIndex.end(), i);
+		break;
+	case Shooting_Range::range_mid:
+		if (i>10)
+			midIndex.insert(midIndex.begin(), i);
+		else
+			midIndex.insert(midIndex.end(), i);
+		break;
+	case Shooting_Range::range_short:
+		if (i>10)
+			shortIndex.insert(shortIndex.begin(), i);
+		else
+			shortIndex.insert(shortIndex.end(), i);
+		break;
+	default:
+		break;
+	}
+}
 void BattleModel::resetFireBattle(){
-	temp = 0;
-	temp1 = 0;
+	exlongIndex.clear();
+	longIndex.clear();
+	midIndex.clear();
+	shortIndex.clear();
+
+
+	for (int i = 0; i < MAX_SHIPS_PER_FLEET; i++)
+	{
+		if (i <= allies.size())
+		{
+			insertToRangeVector(allies[i]->range, i);
+		}
+		if (i <= enemy.size())
+		{
+			insertToRangeVector(enemy[i]->range, 10 + i);
+		}
+	}
+
 }
-int BattleModel::getNextAlliesIndexToFire()
+bool BattleModel::getNextIndexToFire(bool &allies, int &index)
 {
-	if (temp == 0)
-	{
-		temp = 1;
-		return 3;
+	std::vector<int> * vec = &exlongIndex;
+	for (int i = 0; i < 4; i++){
+		if (!vec->empty())
+		{
+			if (allies)
+			{
+				index = vec->front();
+				vec->erase(vec->begin());
+			}
+
+			else
+			{
+				index = vec->back();
+				vec->pop_back();
+			}
+
+			if (index < 10)
+				allies = true;
+			else
+			{
+				allies = false;
+				index = index - 10;
+			}
+				
+			return true;
+		}
+		if (i == 0)
+			vec = &longIndex;
+		if (i == 1)
+			vec = &midIndex;
+		if (i == 2)
+			vec = &shortIndex;
 	}
-	if (temp == 1)
-	{
-		temp = 2;
-		return 5;
-	}
-	if (temp == 2)
-	{
-		temp = 3;
-		return 2;
-	}
-	if (temp == 3)
-	{
-		temp = 4;
-		return 1;
-	}
-	if (temp == 4)
-	{
-		temp = 5;
-		return 0;
-	}
-	if (temp == 5)
-	{
-		temp = -1;
-		return 4;
-	}
-	return temp;
+	
+	
+	return false;
 }
-int BattleModel::getNextEnemyIndexToFire()
+int BattleModel::getTargetIndex(bool alliesAttack)
 {
-	if (temp1 == 0)
+	std::vector<int> aliveTargets;
+	std::vector<CharacterInfo*> *targets;
+	if (alliesAttack)
+		targets = &enemy;
+	else
+		targets = &allies;
+	
+	for (int i = 0; i < targets->size(); i++)
 	{
-		temp1 = 1;
-		return 5;
+		if (targets->at(i)->currentHP != 0)
+			aliveTargets.push_back(i);
 	}
-	if (temp1 == 1)
-	{
-		temp1 = 2;
-		return 1;
-	}
-	if (temp1 == 2)
-	{
-		temp1 = 3;
-		return 0;
-	}
-	if (temp1 == 3)
-	{
-		temp1 = 4;
-		return 3;
-	}
-	if (temp1 == 4)
-	{
-		temp1 = 5;
-		return 4;
-	}
-	if (temp1 == 5)
-	{
-		temp1 = -1;
-		return 2;
-	}
-	return temp1;
+	if (aliveTargets.size() == 0)
+		return -1;
+	float random = CCRANDOM_0_1()*(float)(aliveTargets.size());
+	if (random == aliveTargets.size())
+		random -= 1;
+	return aliveTargets[(int)random];
+
 }
 void BattleModel::getFireDamage(bool alliesAttack, int alliesIndex, int enemyIndex, bool &doubleHit, bool &specialAttack, bool &ci,int &damage, bool &critical,bool &miss)
 {
@@ -185,7 +200,7 @@ void BattleModel::getFireDamage(bool alliesAttack, int alliesIndex, int enemyInd
 	//命中
 	float hit = CCRANDOM_0_1();
 	miss = false;
-	if (hit < 0.2)
+	if (hit - (float)attacker->hitRate/100 + (float)attacked->agility/100>DEFAULT_HIT_RATE)
 	{
 		miss = true;
 		return;
@@ -193,10 +208,10 @@ void BattleModel::getFireDamage(bool alliesAttack, int alliesIndex, int enemyInd
 
 
 	float basicAttack=0;
-	if (attacker->type == CV || attacker->type == CVL) //基本攻击力=火力*1.5+雷装*1.5+爆装*2+55
+	if (attacker->type == CV || attacker->type == CVL || attacker->type==CVA) //基本攻击力=火力*1.5+雷装*1.5+爆装*2+55
 	{
-		int bomb = 0;//TODO
-		basicAttack = (attacker->firePower + attacker->torpedo)*1.5 + bomb * 2 + 55; //
+		
+		basicAttack = (attacker->firePower + attacker->torpedo)*1.5 + attacker->bomb * 2 + 55; //
 	}
 	else //基本攻击力=火力+5
 	{
@@ -252,7 +267,7 @@ void BattleModel::getFireDamage(bool alliesAttack, int alliesIndex, int enemyInd
 	if (damage < 13)
 		critical = false;
 
-	attacked->currentHP -= damage;
+	
 
 	
 		

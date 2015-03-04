@@ -7,8 +7,8 @@ using namespace cocos2d;
 class AnimationMaker
 {
 public:
-	static void playPlaneAnimation(Node* parent,float delay);
-	static void playAirBattleAnimation(Node* parent, float delay);
+	static float playPlaneAnimation(Node* parent,float delay);
+	static float playAirBattleAnimation(Node* parent, float delay);
 	static float playExplodeAnimation(Node* parent, float delay, Point position);
 	static float playExplodeAnimation(Node* parent, float delay, Point position,int times);
 	static float FlyToCenterLeftAndFadeOut(Node* target,float delay);

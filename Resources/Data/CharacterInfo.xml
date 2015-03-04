@@ -23,6 +23,10 @@
     <fuelConsume>40</fuelConsume>
     <ammoConsume>65</ammoConsume>
     <steelConsume>10</steelConsume>
+    <Equipment1>006</Equipment1>
+    <Equipment2>025</Equipment2>
+    <Equipment3>no_equipment</Equipment3>
+    <Equipment4>unavailable</Equipment4>
   </Character>
   <Character name="那珂">
     <id>048</id>
@@ -47,6 +51,10 @@
     <fuelConsume>25</fuelConsume>
     <ammoConsume>25</ammoConsume>
     <steelConsume>10</steelConsume>
+    <Equipment1>004</Equipment1>
+    <Equipment2>no_equipment</Equipment2>
+    <Equipment3>unavailable</Equipment3>
+    <Equipment4>unavailable</Equipment4>
   </Character>
   <Character name="大和">
     <id>131</id>
@@ -71,6 +79,10 @@
     <fuelConsume>250</fuelConsume>
     <ammoConsume>300</ammoConsume>
     <steelConsume>10</steelConsume>
+    <Equipment1>009</Equipment1>
+    <Equipment2>012</Equipment2>
+    <Equipment3>059</Equipment3>
+    <Equipment4>no_equipment</Equipment4>
   </Character>
   <Character name="Bismarck">
     <id>171</id>
@@ -95,6 +107,7 @@
     <fuelConsume>90</fuelConsume>
     <ammoConsume>110</ammoConsume>
     <steelConsume>90</steelConsume>
+   
   </Character>
   <Character name="大凤">
     <id>153</id>
@@ -119,6 +132,10 @@
     <fuelConsume>50</fuelConsume>
     <ammoConsume>50</ammoConsume>
     <steelConsume>50</steelConsume>
+    <Equipment1>060</Equipment1>
+    <Equipment2>024</Equipment2>
+    <Equipment3>017</Equipment3>
+    <Equipment4>no_equipment</Equipment4>
   </Character>
   <Character name="大凤改">
     <id>156</id>
@@ -143,6 +160,10 @@
     <fuelConsume>50</fuelConsume>
     <ammoConsume>50</ammoConsume>
     <steelConsume>50</steelConsume>
+    <Equipment1>022</Equipment1>
+    <Equipment2>018</Equipment2>
+    <Equipment3>no_equipment</Equipment3>
+    <Equipment4>no_equipment</Equipment4>
   </Character>
   <Character name="吹雪">
     <id>011</id>
@@ -167,6 +188,10 @@
     <fuelConsume>5</fuelConsume>
     <ammoConsume>5</ammoConsume>
     <steelConsume>5</steelConsume>
+    <Equipment1>002</Equipment1>
+    <Equipment2>013</Equipment2>
+    <Equipment3>unavailable</Equipment3>
+    <Equipment4>unavailable</Equipment4>
   </Character>
   <Character name="夕立改二">
     <id>144</id>
@@ -191,6 +216,10 @@
     <fuelConsume>15</fuelConsume>
     <ammoConsume>20</ammoConsume>
     <steelConsume>5</steelConsume>
+    <Equipment1>063</Equipment1>
+    <Equipment2>015</Equipment2>
+    <Equipment3>no_equipment</Equipment3>
+    <Equipment4>unavailable</Equipment4>
   </Character>
   <Character name="武藏改">
     <id>148</id>
@@ -239,6 +268,10 @@
     <fuelConsume>80</fuelConsume>
     <ammoConsume>80</ammoConsume>
     <steelConsume>10</steelConsume>
+    <Equipment1>093</Equipment1>
+    <Equipment2>098</Equipment2>
+    <Equipment3>100</Equipment3>
+    <Equipment4>111</Equipment4>
   </Character>
   <Character name="赤城改">
     <id>006b</id>
@@ -263,6 +296,122 @@
     <fuelConsume>75</fuelConsume>
     <ammoConsume>75</ammoConsume>
     <steelConsume>75</steelConsume>
+   <Equipment1>021</Equipment1>
+    <Equipment2>024</Equipment2>
+    <Equipment3>016</Equipment3>
+    <Equipment4>no_equipment</Equipment4>
+  </Character>
+  <Character name="金刚改二">
+    <id>149</id>
+    <nextId>149</nextId>
+    <name>JinGangGai2</name>
+    <nameCH>金刚改二</nameCH>
+    <type>BB</type>
+    <resource>149JINGANGGAIER</resource>
+    <level>75</level>
+    <maxHP>82</maxHP>
+    <firePower>90</firePower>
+    <armour>85</armour>
+    <torpedo>0</torpedo>
+    <agility>63</agility>
+    <antiaircraft>47</antiaircraft>
+    <capacity>12</capacity>
+    <antisubmarine>0</antisubmarine>
+    <speed>high</speed>
+    <scout>41</scout>
+    <range>long</range>
+    <luck>15</luck>
+    <fuelConsume>100</fuelConsume>
+    <ammoConsume>125</ammoConsume>
+    <steelConsume>100</steelConsume>
+   <Equipment1>008</Equipment1>
+    <Equipment2>no_equipment</Equipment2>
+    <Equipment3>no_equipment</Equipment3>
+    <Equipment4>no_equipment</Equipment4>
+  </Character>
+  <Character name="比叡改二">
+    <id>150</id>
+    <nextId>150</nextId>
+    <name>BiRuiGai2</name>
+    <nameCH>比叡改二</nameCH>
+    <type>BB</type>
+    <resource>150BIRUIGAIER</resource>
+    <level>75</level>
+    <maxHP>83</maxHP>
+    <firePower>76</firePower>
+    <armour>72</armour>
+    <torpedo>0</torpedo>
+    <agility>30</agility>
+    <antiaircraft>41</antiaircraft>
+    <capacity>36</capacity>
+    <antisubmarine>0</antisubmarine>
+    <speed>high</speed>
+    <scout>16</scout>
+    <range>long</range>
+    <luck>41</luck>
+    <fuelConsume>100</fuelConsume>
+    <ammoConsume>125</ammoConsume>
+    <steelConsume>100</steelConsume>
+   <Equipment1>008</Equipment1>
+    <Equipment2>no_equipment</Equipment2>
+    <Equipment3>no_equipment</Equipment3>
+    <Equipment4>no_equipment</Equipment4>
+  </Character>
+   <Character name="榛名改二">
+    <id>151</id>
+    <nextId>151</nextId>
+    <name>ZhenMingGai2</name>
+    <nameCH>榛名改二</nameCH>
+    <type>BB</type>
+    <resource>151ZHENMINGGAIER</resource>
+    <level>80</level>
+    <maxHP>81</maxHP>
+    <firePower>75</firePower>
+    <armour>70</armour>
+    <torpedo>0</torpedo>
+    <agility>39</agility>
+    <antiaircraft>41</antiaircraft>
+    <capacity>12</capacity>
+    <antisubmarine>0</antisubmarine>
+    <speed>high</speed>
+    <scout>17</scout>
+    <range>long</range>
+    <luck>41</luck>
+    <fuelConsume>100</fuelConsume>
+    <ammoConsume>125</ammoConsume>
+    <steelConsume>100</steelConsume>
+   <Equipment1>no_equipment</Equipment1>
+    <Equipment2>no_equipment</Equipment2>
+    <Equipment3>no_equipment</Equipment3>
+    <Equipment4>no_equipment</Equipment4>
+  </Character>
+   <Character name="雾岛改二">
+    <id>152</id>
+    <nextId>152</nextId>
+    <name>WuDaoGai2</name>
+    <nameCH>雾岛改二</nameCH>
+    <type>BB</type>
+    <resource>152WUDAOGAIER</resource>
+    <level>75</level>
+    <maxHP>82</maxHP>
+    <firePower>78</firePower>
+    <armour>70</armour>
+    <torpedo>0</torpedo>
+    <agility>34</agility>
+    <antiaircraft>30</antiaircraft>
+    <capacity>12</capacity>
+    <antisubmarine>0</antisubmarine>
+    <speed>high</speed>
+    <scout>15</scout>
+    <range>long</range>
+    <luck>14</luck>
+    <fuelConsume>100</fuelConsume>
+    <ammoConsume>125</ammoConsume>
+    <steelConsume>100</steelConsume>
+   <Equipment1>008</Equipment1>
+    <Equipment2>no_equipment</Equipment2>
+    <Equipment3>no_equipment</Equipment3>
+    <Equipment4>no_equipment</Equipment4>
   </Character>
   <Character name="伊19">
     <id>123</id>
@@ -292,7 +441,7 @@
     <id>186b</id>
     <nextId>186b</nextId>
     <name>ShiJinFengGai</name>
-    <nameCH>伊时津风改</nameCH>
+    <nameCH>时津风改</nameCH>
     <type>DD</type>
     <resource>322SHIJINFENGGAI</resource>
     <level>30</level>
@@ -356,6 +505,78 @@
     <scout>20</scout>
     <range>long</range>
     <luck>5</luck>
+    <fuelConsume>10</fuelConsume>
+    <ammoConsume>20</ammoConsume>
+    <steelConsume>10</steelConsume>
+  </Character>
+  <Character name="軽巡ト級">
+    <id>qxdj</id>
+    <nextId>qxdj</nextId>
+    <name>DO</name>
+    <nameCH>軽巡ト級</nameCH>
+    <type>CL</type>
+    <resource>DO</resource>
+    <level>1</level>
+    <maxHP>39</maxHP>
+    <firePower>24</firePower>
+    <armour>20</armour>
+    <torpedo>28</torpedo>
+    <agility>15</agility>
+    <antiaircraft>12</antiaircraft>
+    <capacity>6</capacity>
+    <antisubmarine>50</antisubmarine>
+    <speed>high</speed>
+    <scout>6</scout>
+    <range>mid</range>
+    <luck>5</luck>
+    <fuelConsume>10</fuelConsume>
+    <ammoConsume>20</ammoConsume>
+    <steelConsume>10</steelConsume>
+  </Character>
+  <Character name="軽巡ホ級">
+    <id>qxhj</id>
+    <nextId>qxhj</nextId>
+    <name>HO</name>
+    <nameCH>軽巡ホ級</nameCH>
+    <type>CL</type>
+    <resource>HO</resource>
+    <level>1</level>
+    <maxHP>33</maxHP>
+    <firePower>14</firePower>
+    <armour>15</armour>
+    <torpedo>24</torpedo>
+    <agility>15</agility>
+    <antiaircraft>10</antiaircraft>
+    <capacity>2</capacity>
+    <antisubmarine>30</antisubmarine>
+    <speed>high</speed>
+    <scout>6</scout>
+    <range>mid</range>
+    <luck>1</luck>
+    <fuelConsume>10</fuelConsume>
+    <ammoConsume>20</ammoConsume>
+    <steelConsume>10</steelConsume>
+  </Character>
+  <Character name="重巡リ级">
+    <id>zxlj</id>
+    <nextId>zxlj</nextId>
+    <name>LI</name>
+    <nameCH>重巡リ级</nameCH>
+    <type>CA</type>
+    <resource>LI</resource>
+    <level>1</level>
+    <maxHP>58</maxHP>
+    <firePower>32</firePower>
+    <armour>28</armour>
+    <torpedo>32</torpedo>
+    <agility>12</agility>
+    <antiaircraft>16</antiaircraft>
+    <capacity>9</capacity>
+    <antisubmarine>0</antisubmarine>
+    <speed>high</speed>
+    <scout>10</scout>
+    <range>mid</range>
+    <luck>1</luck>
     <fuelConsume>10</fuelConsume>
     <ammoConsume>20</ammoConsume>
     <steelConsume>10</steelConsume>

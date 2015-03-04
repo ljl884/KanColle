@@ -17,13 +17,30 @@ void PortMainLayer::initLayer()
 	floor->setPosition(400, 100);
 	floor->setZOrder(-2);
 	this->addChild(floor);
-	wall = Sprite::create("furniture/wall/001.png");
+	wall = Sprite::create("furniture/wall/012.png");
 	wall->setPosition(400, 285);
 	wall->setZOrder(-2);
 	this->addChild(wall);
+	object = Sprite::create("furniture/object/015.png");
+	object->setPosition(80, 380);
+	object->setZOrder(-2);
+	this->addChild(object);
+	desk = Sprite::create("furniture/desk/021.png");
+	desk->setPosition(170, 200);
+	desk->setZOrder(-2);
+	this->addChild(desk);
+	window = Sprite::create("furniture/window/017.png");
+	window->setPosition(450, 300);
+	window->setZOrder(-2);
+	this->addChild(window);
+	
+	chest = Sprite::create("furniture/chest/003.png");
+	chest->setPosition(700, 250);
+	chest->setZOrder(-2);
+	this->addChild(chest);
 
 	//girl
-	setGirl("153DAFENG");
+	updateGirl();
 
 	//buttons
 	initMenu();
@@ -62,47 +79,21 @@ void PortMainLayer::initMenu()
 	this->addChild(menu);
 
 }
-void PortMainLayer::switchGirl()
-{
-	if (girlflag == 0)
-	{
-		setGirl("003NAKE");
-		girlflag = 1;
-	}
-	else if (girlflag == 1)
-	{
-		setGirl("136DAHEGAI");
-		girlflag = 2;
-	}
-	else if (girlflag == 2)
-	{
-		setGirl("144XILIGAIER");
-		girlflag = 3;
-	}
-	else if (girlflag == 3)
-	{
-		setGirl("278JIAHEGAI");
-		girlflag = 4;
-	}
-	else if (girlflag == 4)
-	{
-		setGirl("277CHICHENGGAI");
-		girlflag = 5;
-	}
-	else if (girlflag == 5)
-	{
-		setGirl("153DAFENG");
-		girlflag = 0;
-	}
-	
-}
-void PortMainLayer::setGirl(std::string resource)
+
+void PortMainLayer::updateGirl()
 {
 
-	
+	std::string resource = GameModel::getInstance()->getFleet(0)->getShip(0)->resourceFolder;
 	if (girl == nullptr)
 		girl = Sprite::create("Character/" + resource + "/image 17.png");
 	girl->setTexture("Character/" + resource + "/image 17.png");
+	Size size = girl->getContentSize();
+	if (size.height>799)
+		girl->setAnchorPoint(Vec2(0.5, 0.45));
+	else if (size.height > 699)
+	girl->setAnchorPoint(Vec2(0.5, 0.4));
+	else
+		girl->setAnchorPoint(Vec2(0.5, 0.25));
 	this->addChild(girl);
 	girl->setPosition(600, 0);
 	girl->setZOrder(-1);

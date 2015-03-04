@@ -63,7 +63,8 @@ bool BattleHero::init(std::string name, Node *parent, int row){
 	battleBar = new BattleBar(parent);
 
 	//default
-	this->setMaxHp(50);
+	this->setMaxHp(info->maxHP);
+	this->setCurrentHp(info->currentHP);
 	
 	
 	return true;
@@ -94,16 +95,25 @@ float BattleHero::showAttackingAnime(float delay){
 	closeUp->setPosition(-400, -0);
 	AnimationMaker::FlyToPositionAndFadeOut(closeUp, delay,ccp(100,240),0.5);
 	updateInformationBoard();
+	informationBoard->runAction(Sequence::create(DelayTime::create(delay), FadeIn::create(0.05), DelayTime::create(0.5), FadeOut::create(0.3), NULL));
+	
+	if (info->canAirBattle())
+	{
+		return AnimationMaker::playAirBattleAnimation(parent, delay + 0.9);
+		 
+	}
+	Equipment* mainCannon = info->getMainCannon();
+	if (mainCannon != nullptr){
+		if (equipmentLabel != nullptr)
+			delete equipmentLabel;
+		equipmentLabel = Sprite::create(mainCannon->getLabel());
+		equipmentLabel->setPosition(650, 100);
+		equipmentLabel->setOpacity(0);
 
-	if (equipmentLabel != nullptr)
-		delete equipmentLabel;
-	equipmentLabel = Sprite::create("btxt_flat/063.png");
-	equipmentLabel->setPosition(650, 100);
-	equipmentLabel->setOpacity(0);
-
-	battleBar->openAndCloseAnimation(bottom, equipmentLabel, delay);
-	informationBoard->runAction(Sequence::create(DelayTime::create(delay),FadeIn::create(0.05), DelayTime::create(0.5), FadeOut::create(0.3),NULL));
-	return 0;
+		battleBar->openAndCloseAnimation(bottom, equipmentLabel, delay);
+	}
+	
+	return 0.05+0.5+0.3;
 }
 void BattleHero::stepOut(float delay){
 	FiniteTimeAction *out = MoveBy::create(0.2, Point(40, 0));
@@ -139,6 +149,16 @@ void BattleHero::updateInformationBoard()
 		nameLabel->setPosition(45, 80);
 		levelLabel->setPosition(60, 40);
 
+		equipment1 = Sprite::create();
+		equipment2 = Sprite::create();
+		equipment3 = Sprite::create();
+		equipment4 = Sprite::create();
+		equipment1->setPosition(190, 72);
+		equipment2->setPosition(230, 72);
+		equipment3->setPosition(270, 72);
+		equipment4->setPosition(310, 72);
+		
+
 		informationBoard->setCascadeOpacityEnabled(true);
 
 		informationBoard->addChild(firePowerLabel);
@@ -147,6 +167,10 @@ void BattleHero::updateInformationBoard()
 		informationBoard->addChild(armourLabel);
 		informationBoard->addChild(nameLabel);
 		informationBoard->addChild(levelLabel);
+		informationBoard->addChild(equipment1);
+		informationBoard->addChild(equipment2);
+		informationBoard->addChild(equipment3);
+		informationBoard->addChild(equipment4);
 	}
 	firePowerLabel->setString(int2str(info->firePower));
 	
@@ -158,6 +182,15 @@ void BattleHero::updateInformationBoard()
 	
 	nameLabel->setString(info->nameCH);
 	levelLabel->setString(int2str(info->level));
+
+	if (info->equipments[0] != nullptr)
+		equipment1->setTexture(info->equipments[0]->getIcon());
+	if (info->equipments[1] != nullptr)
+		equipment2->setTexture(info->equipments[1]->getIcon());
+	if (info->equipments[2] != nullptr)
+		equipment3->setTexture(info->equipments[2]->getIcon());
+	if (info->equipments[3] != nullptr)
+		equipment4->setTexture(info->equipments[3]->getIcon());
 	
 
 	

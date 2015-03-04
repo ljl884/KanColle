@@ -56,10 +56,10 @@ void CharacterDetailPage::initPage()
 	hpBar->setPosition(370, 340);
 
 	//equipment
-	auto equipmentContainer1 = Sprite::create("commonAssets/image 249.png");
-	auto equipmentContainer2 = Sprite::create("commonAssets/image 249.png");
-	auto equipmentContainer3 = Sprite::create("commonAssets/image 249.png");
-	auto equipmentContainer4 = Sprite::create("commonAssets/image 249.png");
+	equipmentContainer1 = new EquipmentContainer();
+	equipmentContainer2 = new EquipmentContainer();
+	equipmentContainer3 = new EquipmentContainer();
+	equipmentContainer4 = new EquipmentContainer();
 	equipmentContainer1->setPosition(450, 310);
 	equipmentContainer2->setPosition(450, 275);
 	equipmentContainer3->setPosition(450, 240);
@@ -181,6 +181,11 @@ void CharacterDetailPage::setCharacter(CharacterInfo* info)
 	else name->setScaleX(1);
 
 	stars->setNumber(info->star);
+
+	equipmentContainer1->updateEquipment(info->equipments[0]);
+	equipmentContainer2->updateEquipment(info->equipments[1]);
+	equipmentContainer3->updateEquipment(info->equipments[2]);
+	equipmentContainer4->updateEquipment(info->equipments[3]);
 }
 void CharacterDetailPage::moveOut()
 {

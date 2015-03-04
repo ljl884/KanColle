@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EquipmentInfo>
+  <Equipment id="no_equipment">
+    <id>no_equipment</id>
+    <type>no_equipment</type>
+    <name>no_equipment</name>
+  </Equipment>
+  <Equipment id="unavailable ">
+    <id>unavailable</id>
+    <type>unavailable</type>
+   <name>unavailable</name>
+  </Equipment>
+   <!--鱼雷-->
+  <Equipment id="013">
+    <id>013</id>
+    <name>61cm三连装鱼雷</name>
+    <type>torpedo</type>   
+  </Equipment>
+  <Equipment id="014">
+    <id>014</id>
+    <name>61cm四连装鱼雷</name>
+    <type>torpedo</type>   
+  </Equipment>
+  <Equipment id="015">
+    <id>015</id>
+    <name>61cm四连装(酸素)鱼雷</name>
+    <type>torpedo</type>   
+  </Equipment>
+  <!--小口径主炮-->
+  <Equipment id="001">
+    <id>001</id>
+    <name>12cm单装炮</name>
+    <type>small_cannon</type>
+    <firePower>1</firePower>
+    <antiaircraft>1</antiaircraft>
+    <range>short</range>
+  </Equipment>
+  <Equipment id="002">
+    <id>002</id>
+    <name>12.7cm连装炮</name>
+    <type>small_cannon</type>
+    <firePower>2</firePower>
+    <antiaircraft>1</antiaircraft>
+    <range>short</range>
+  </Equipment>
+  <Equipment id="003">
+    <id>003</id>
+    <name>10cm连装高脚炮</name>
+    <type>small_cannon</type>
+    <firePower>2</firePower>
+    <antiaircraft>7</antiaircraft>
+    <range>short</range>
+  </Equipment>
+  <Equipment id="048">
+    <id>048</id>
+    <name>12.7cm单装高脚炮</name>
+    <type>small_cannon</type>
+    <firePower>1</firePower>
+    <antiaircraft>2</antiaircraft>
+    <range>short</range>
+  </Equipment>
+    <Equipment id="063">
+    <id>063</id>
+    <name>12.7cm连装炮B型改二</name>
+    <type>small_cannon</type>
+    <firePower>3</firePower>
+    <antiaircraft>2</antiaircraft>
+    <range>short</range>
+  </Equipment>
+    <Equipment id="078">
+    <id>078</id>
+    <name>12.7cm单装炮</name>
+    <type>small_cannon</type>
+    <firePower>2</firePower>
+      <hitRate>1</hitRate>
+    <range>short</range>
+  </Equipment>
+  <Equipment id="091">
+    <id>091</id>
+    <name>12.7cm连装高角炮(后期型)</name>
+    <type>small_cannon</type>
+    <firePower>2</firePower>
+    <antiaircraft>5</antiaircraft>
+     <hitRate>1</hitRate>
+    <antisubmarine>1</antisubmarine>
+    <range>short</range>
+  </Equipment>
+   <!--中口径主炮-->
+  <Equipment id="004">
+    <id>004</id>
+    <name>14cm单装炮</name>
+    <type>mid_cannon</type>
+    <firePower>1</firePower>
+    <range>mid</range>
+  </Equipment>
+  <Equipment id="005">
+    <id>005</id>
+    <name>15.5cm三连装炮</name>
+    <type>mid_cannon</type>
+    <firePower>5</firePower>
+    <antiaircraft>3</antiaircraft>
+    <range>mid</range>
+  </Equipment>
+  <Equipment id="006">
+    <id>006</id>
+    <name>20.3cm连装炮</name>
+    <type>mid_cannon</type>
+    <firePower>7</firePower>
+    <antiaircraft>3</antiaircraft>
+    <range>mid</range>
+  </Equipment>
+   <!--大口径主炮-->
+  <Equipment id="007">
+    <id>007</id>
+    <name>35.6cm连装炮</name>
+    <type>large_cannon</type>
+    <firePower>14</firePower>
+    <antiaircraft>4</antiaircraft>
+    <range>long</range>
+  </Equipment>
+ <Equipment id="008">
+    <id>008</id>
+    <name>41cm连装炮</name>
+    <type>large_cannon</type>
+    <firePower>20</firePower>
+    <antiaircraft>4</antiaircraft>
+    <range>long</range>
+  </Equipment>
+ <Equipment id="009">
+    <id>009</id>
+    <name>46cm三连装炮</name>
+    <type>large_cannon</type>
+    <firePower>26</firePower>
+    <antiaircraft>5</antiaircraft>
+    <range>exlong</range>
+  </Equipment>
+   <!--副炮-->
+   <Equipment id="011">
+    <id>011</id>
+    <name>15.2cm单装炮</name>
+    <type>secondary_cannon</type>
+  
+    <range>mid</range>
+  </Equipment>
+     <Equipment id="012">
+    <id>012</id>
+    <name>15.5cm三连装炮(副炮)</name>
+    <type>secondary_cannon</type>
+  
+    <range>mid</range>
+  </Equipment>
+  <!--舰攻-->
+   <Equipment id="016">
+    <id>016</id>
+    <name>九七式舰攻</name>
+    <type>attacker</type>
+    <torpedo>5</torpedo>
+   <antisubmarine>4</antisubmarine>
+   <scout>1</scout>
+  </Equipment>
+    <Equipment id="017">
+    <id>017</id>
+    <name>天山</name>
+    <type>attacker</type>
+    <torpedo>7</torpedo>
+   <antisubmarine>3</antisubmarine>
+   <scout>1</scout>
+  </Equipment>
+    <Equipment id="018">
+    <id>018</id>
+    <name>流星</name>
+    <type>attacker</type>
+    <torpedo>10</torpedo>
+   <antisubmarine>3</antisubmarine>
+   <scout>1</scout>
+  </Equipment>
+        <Equipment id="052">
+    <id>052</id>
+    <name>流星改</name>
+    <type>attacker</type>
+    <torpedo>13</torpedo>
+   <antisubmarine>3</antisubmarine>
+   <scout>2</scout>
+  </Equipment>
+      <Equipment id="082">
+    <id>082</id>
+    <name>九七式舰攻(九三一空)</name>
+    <type>attacker</type>
+    <torpedo>6</torpedo>
+   <antisubmarine>7</antisubmarine>
+   <scout>2</scout>
+  </Equipment>
+      <Equipment id="083">
+    <id>083</id>
+    <name>天山(九三一空)</name>
+    <type>attacker</type>
+    <torpedo>9</torpedo>
+   <antisubmarine>8</antisubmarine>
+   <scout>2</scout>
+  </Equipment>
+  <Equipment id="093">
+    <id>093</id>
+    <name>九七式舰攻(友永队)</name>
+    <type>attacker</type>
+    <torpedo>11</torpedo>
+    <antiaircraft>1</antiaircraft>
+    <hitRate>3</hitRate>
+   <antisubmarine>5</antisubmarine>
+   <scout>4</scout>
+  </Equipment>
+ <Equipment id="094">
+    <id>094</id>
+    <name>天山一二型(友永队)</name>
+    <type>attacker</type>
+    <torpedo>14</torpedo>
+    <antiaircraft>1</antiaircraft>
+    <hitRate>3</hitRate>
+   <antisubmarine>6</antisubmarine>
+   <scout>5</scout>
+  </Equipment>
+ <Equipment id="098">
+    <id>098</id>
+    <name>九七式舰攻(熟练)</name>
+    <type>attacker</type>
+    <torpedo>8</torpedo>
+    <hitRate>2</hitRate>
+    <antisubmarine>5</antisubmarine>
+    <scout>2</scout>
+  </Equipment>
+ <Equipment id="112">
+    <id>112</id>
+    <name>天山(六〇一空)</name>
+    <type>attacker</type>
+    <torpedo>10</torpedo>
+    <hitRate>1</hitRate>
+    <antisubmarine>4</antisubmarine>
+    <scout>2</scout>
+  </Equipment>
+  
+ <!--舰战-->
+ <Equipment id="019">
+    <id>019</id>
+    <name>九六式舰战</name>
+    <type>fighter</type>
+    <antiaircraft>2</antiaircraft>
+  </Equipment>
+ <Equipment id="020">
+    <id>020</id>
+    <name>零式舰战21型</name>
+    <type>fighter</type>
+    <antiaircraft>5</antiaircraft>
+  </Equipment>
+ <Equipment id="021">
+    <id>021</id>
+    <name>零式舰战52型</name>
+    <type>fighter</type>
+    <antiaircraft>6</antiaircraft>
+  </Equipment>
+ <Equipment id="055">
+    <id>055</id>
+    <name>紫电改二</name>
+    <type>fighter</type>
+    <antiaircraft>9</antiaircraft>
+  </Equipment>
+ <Equipment id="022">
+    <id>022</id>
+    <name>烈风</name>
+    <type>fighter</type>
+    <antiaircraft>10</antiaircraft>
+  </Equipment>
+ <Equipment id="053">
+    <id>053</id>
+    <name>烈风改</name>
+    <type>fighter</type>
+    <antiaircraft>12</antiaircraft>
+  </Equipment>
+ <Equipment id="056">
+    <id>056</id>
+    <name>震电改</name>
+    <type>fighter</type>
+    <antiaircraft>15</antiaircraft>
+  </Equipment>
+ <Equipment id="096">
+    <id>096</id>
+    <name>零式舰战21型(熟练)</name>
+    <type>fighter</type>
+    <antiaircraft>8</antiaircraft>
+   <scout>1</scout>
+    <hitRate>2</hitRate>
+    <agility>2</agility>
+  </Equipment>
+ <Equipment id="109">
+    <id>109</id>
+    <name>零战52型丙(六〇一空)</name>
+    <type>fighter</type>
+    <antiaircraft>9</antiaircraft>
+      <hitRate>1</hitRate>
+    <agility>1</agility>
+  </Equipment>
+ <Equipment id="056">
+    <id>056</id>
+    <name>烈风(六〇一空)</name>
+    <type>fighter</type>
+    <antiaircraft>11</antiaircraft>
+    <hitRate>1</hitRate>
+    <agility>2</agility>
+  </Equipment>
+  
+  <!--舰爆-->
+  
+  <Equipment id="023">
+    <id>023</id>
+    <name>九九式舰爆</name>
+    <type>bomber</type>
+    <bomb>5</bomb>
+    <antisubmarine>3</antisubmarine>
+  </Equipment>
+  <Equipment id="024">
+    <id>024</id>
+    <name>彗星</name>
+    <type>bomber</type>
+    <bomb>8</bomb>
+    <antisubmarine>3</antisubmarine>
+  </Equipment>
+  <Equipment id="057">
+    <id>057</id>
+    <name>彗星一二型甲</name>
+    <type>bomber</type>
+    <bomb>10</bomb>
+    <antisubmarine>3</antisubmarine>
+    <scout>1</scout>
+  </Equipment>
+  <Equipment id="060">
+    <id>060</id>
+    <name>零式舰战62型(爆战)</name>
+    <type>bomber</type>
+    <bomb>4</bomb>
+    <antisubmarine>3</antisubmarine>
+    <antiaircraft>4</antiaircraft>
+  </Equipment>
+ <Equipment id="064">
+    <id>064</id>
+    <name>Ju87C改</name>
+    <type>bomber</type>
+    <bomb>9</bomb>
+    <antisubmarine>5</antisubmarine>
+    <hitRate>1</hitRate>
+  </Equipment>
+ <Equipment id="097">
+    <id>097</id>
+    <name>九九式舰爆(熟练)</name>
+    <type>bomber</type>
+    <bomb>7</bomb>
+   <antiaircraft>1</antiaircraft>
+    <antisubmarine>4</antisubmarine>
+   <scout>2</scout>
+    <hitRate>2</hitRate>
+  </Equipment>
+ <Equipment id="099">
+    <id>099</id>
+    <name>九九式舰爆(江草队)</name>
+    <type>bomber</type>
+    <bomb>10</bomb>
+    <antisubmarine>5</antisubmarine>
+   <scout>3</scout>
+    <hitRate>4</hitRate>
+  </Equipment>
+   <Equipment id="100">
+    <id>100</id>
+    <name>彗星(江草队)</name>
+    <type>bomber</type>
+    <bomb>13</bomb>
+     <antiaircraft>1</antiaircraft>
+    <antisubmarine>5</antisubmarine>
+   <scout>4</scout>
+    <hitRate>4</hitRate>
+  </Equipment>
+   <Equipment id="111">
+    <id>111</id>
+    <name>彗星(六〇一空)</name>
+    <type>bomber</type>
+    <bomb>11</bomb>
+    <antisubmarine>4</antisubmarine>
+   <scout>1</scout>
+    <hitRate>1</hitRate>
+  </Equipment>
+    <!--水上机-->
+   <Equipment id="025">
+    <id>025</id>
+    <name>零式水上侦查机</name>
+    <type>seaplane</type>
+    <bomb>1</bomb>
+     <antiaircraft>1</antiaircraft>
+    <antisubmarine>4</antisubmarine>
+   <scout>5</scout>
+    <hitRate>1</hitRate>
+  </Equipment>
+   <Equipment id="026">
+    <id>026</id>
+    <name>瑞云</name>
+    <type>seaplane</type>
+    <bomb>4</bomb>
+     <antiaircraft>2</antiaircraft>
+    <antisubmarine>4</antisubmarine>
+   <scout>6</scout>
+    <hitRate>1</hitRate>
+  </Equipment>
+   <Equipment id="059">
+    <id>059</id>
+    <name>零式水上观测机</name>
+    <type>seaplane</type>
+    <bomb>1</bomb>
+     <antiaircraft>2</antiaircraft>
+    <antisubmarine>4</antisubmarine>
+   <scout>6</scout>
+    <hitRate>2</hitRate>
+  </Equipment>
+   <Equipment id="062">
+    <id>062</id>
+    <name>试制晴岚</name>
+    <type>seaplane</type>
+    <bomb>11</bomb>
+   <scout>6</scout>
+    <hitRate>1</hitRate>
+  </Equipment>
+   <Equipment id="079">
+    <id>079</id>
+    <name>瑞云(六三四空)</name>
+    <type>seaplane</type>
+    <bomb>6</bomb>
+     <antiaircraft>2</antiaircraft>
+    <antisubmarine>5</antisubmarine>
+   <scout>6</scout>
+    <hitRate>1</hitRate>
+  </Equipment>
+     <Equipment id="080">
+    <id>080</id>
+    <name>瑞云12型</name>
+    <type>seaplane</type>
+    <bomb>7</bomb>
+     <antiaircraft>3</antiaircraft>
+    <antisubmarine>5</antisubmarine>
+   <scout>6</scout>
+    <hitRate>1</hitRate>
+  </Equipment>
+   <Equipment id="081">
+    <id>081</id>
+    <name>瑞云12型(六三四空)</name>
+    <type>seaplane</type>
+    <bomb>9</bomb>
+     <antiaircraft>3</antiaircraft>
+    <antisubmarine>6</antisubmarine>
+   <scout>7</scout>
+    <hitRate>1</hitRate>
+  </Equipment>
+   <Equipment id="102">
+    <id>102</id>
+    <name>九八式水上侦察机(夜侦)</name>
+    <type>seaplane</type>
+    <antisubmarine>1</antisubmarine>
+    <scout>3</scout>
+    <hitRate>1</hitRate>
+  </Equipment>
+
+</EquipmentInfo>

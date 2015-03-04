@@ -11,16 +11,19 @@ class PortMainLayer : public Layer
 public:
 	PortMainLayer(PortScene *parent);
 	~PortMainLayer();
-	void setGirl(std::string resource);
-	void switchGirl();
+	void updateGirl();
+	
 
 private:
 
 	int girlflag;
 	PortScene * parent;
 	Sprite * floor;
+	Sprite * desk;
 	Sprite * wall;
-
+	Sprite *window;
+	Sprite*object;
+	Sprite* chest;
 	Sprite *girl;
 
 private:

@@ -7,6 +7,7 @@ GameModel::GameModel()
 {
 
 	nextShipId = 0;
+	nextEquipmentId = 0;
 	for (int i = 0; i < MAX_FLEET_NUMBER; i++)
 	{
 		fleets.push_back(new Fleet(i));
@@ -26,6 +27,11 @@ int GameModel::getShipId()
 	nextShipId++;
 	return nextShipId;
 }
+int GameModel::getEquipmentId()
+{
+	nextEquipmentId++;
+	return nextEquipmentId;
+}
 void GameModel::setupInitData()
 {
 	CharacterInfo *info = XMLParser::getInstance()->loadCharacterInfo("JiaHeGai");
@@ -34,12 +40,6 @@ void GameModel::setupInitData()
 	CharacterInfo *info4 = XMLParser::getInstance()->loadCharacterInfo("XiLiGai2");
 	CharacterInfo *info5 = XMLParser::getInstance()->loadCharacterInfo("AiDang");
 	CharacterInfo *info6 = XMLParser::getInstance()->loadCharacterInfo("ChuiXue");
-	CharacterInfo *info7 = XMLParser::getInstance()->loadCharacterInfo("ChiChengGai");
-	CharacterInfo *info8 = XMLParser::getInstance()->loadCharacterInfo("DaFeng");
-	CharacterInfo *info9 = XMLParser::getInstance()->loadCharacterInfo("WuZangGai");
-	CharacterInfo *info10 = XMLParser::getInstance()->loadCharacterInfo("DaHe");
-	CharacterInfo *info11 = XMLParser::getInstance()->loadCharacterInfo("Bismarck");
-	CharacterInfo *info12 = XMLParser::getInstance()->loadCharacterInfo("ShiJinFengGai");
 
 	allShips.push_back(info);
 	allShips.push_back(info2);
@@ -47,12 +47,16 @@ void GameModel::setupInitData()
 	allShips.push_back(info4);
 	allShips.push_back(info5);
 	allShips.push_back(info6);
-	allShips.push_back(info7);
-	allShips.push_back(info8);
-	allShips.push_back(info9);
-	allShips.push_back(info10);
-	allShips.push_back(info11);
-	allShips.push_back(info12);
+	allShips.push_back(XMLParser::getInstance()->loadCharacterInfo("ChiChengGai"));
+	allShips.push_back(XMLParser::getInstance()->loadCharacterInfo("DaFeng"));
+	allShips.push_back(XMLParser::getInstance()->loadCharacterInfo("WuZangGai"));
+	allShips.push_back(XMLParser::getInstance()->loadCharacterInfo("DaHe"));
+	allShips.push_back(XMLParser::getInstance()->loadCharacterInfo("Bismarck"));
+	allShips.push_back(XMLParser::getInstance()->loadCharacterInfo("ShiJinFengGai"));
+	allShips.push_back(XMLParser::getInstance()->loadCharacterInfo("JinGangGai2"));
+	allShips.push_back(XMLParser::getInstance()->loadCharacterInfo("BiRuiGai2"));
+	allShips.push_back(XMLParser::getInstance()->loadCharacterInfo("ZhenMingGai2"));
+	allShips.push_back(XMLParser::getInstance()->loadCharacterInfo("WuDaoGai2"));
 
 
 	fleets[0]->addShip(info);
@@ -62,5 +66,5 @@ void GameModel::setupInitData()
 	fleets[0]->addShip(info5);
 	fleets[0]->addShip(info6);
 
-	fleets[0]->switchShip(info10, 2);
+
 }

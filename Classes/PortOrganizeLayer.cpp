@@ -1,7 +1,7 @@
 #include "PortOrganizeLayer.h"
+#include "PortScene.h"
 
-
-PortOrganizeLayer::PortOrganizeLayer(Node* parent)
+PortOrganizeLayer::PortOrganizeLayer(PortScene* parent)
 {
 	this->parent = parent;
 	this->setZOrder(-1);
@@ -110,6 +110,7 @@ void PortOrganizeLayer::updateContainers()
 			containers[i]->setPosition(628, 80);
 
 	}
+	parent->updateAssistantGirl();
 
 }
 void PortOrganizeLayer::showDetail(int index)

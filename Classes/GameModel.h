@@ -16,6 +16,7 @@ public:
 	Fleet* getFleet(int index);
 	inline std::vector<CharacterInfo*> getAllShips(){ return allShips; }
 	int getShipId();
+	int getEquipmentId();
 	void setupInitData();
 
 private:
@@ -24,6 +25,7 @@ private:
 	std::vector<Fleet*> fleets;
 	std::vector<CharacterInfo*> allShips;
 	int nextShipId;
+	int nextEquipmentId;
 
 };
 

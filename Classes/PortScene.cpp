@@ -378,6 +378,10 @@ bool PortScene::init()
 
 	
 }
+void PortScene::updateAssistantGirl()
+{
+	this->mainlayer->updateGirl();
+}
 void PortScene::menuSettingCallback(Ref* pSender)
 {
 	Director::getInstance()->end();
@@ -390,5 +394,5 @@ void PortScene::menuHandlingCallback(Ref* pSender)
 
 void PortScene::changeFurnitureCallback(Ref* psSender)
 {
-	mainlayer->switchGirl();
+
 }

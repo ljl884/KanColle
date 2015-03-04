@@ -29,6 +29,7 @@ public:
 	void menuSettingCallback(Ref* pSender);
 	void menuHandlingCallback(Ref* pSender);
 	void changeFurnitureCallback(Ref* psSender);
+	void updateAssistantGirl();
 	PortScene();
 private:
 	

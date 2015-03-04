@@ -8,6 +8,7 @@
 using namespace cocos2d;
 enum ScriptType{
 	characterInfo,
+	equipment,
 	strings
 };
 class XMLParser{
@@ -18,13 +19,16 @@ public :
 			instance = new XMLParser();
 		return instance;
 	}
-	 CharacterInfo* loadCharacterInfo(std::string name);
-	 std::string getStringByName(std::string name);
+	Equipment* loadEquipmentInfo(std::string id);
+	CharacterInfo* loadCharacterInfo(std::string name);
+	std::string getStringByName(std::string name);
+	 
 	
 private:
 	XMLParser();
 	static XMLParser *instance;
 	tinyxml2::XMLDocument characterDoc;
+	tinyxml2::XMLDocument equipmentDoc;
 	tinyxml2::XMLDocument stringsDoc;
 	tinyxml2::XMLElement* findNodeByName(std::string name, ScriptType type);
 };

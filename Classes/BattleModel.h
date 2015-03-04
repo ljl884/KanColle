@@ -49,8 +49,8 @@ public:
 
 	//炮击战
 	void resetFireBattle();
-	int getNextAlliesIndexToFire();
-	int getNextEnemyIndexToFire();
+	int getTargetIndex(bool alliesAttack);
+	bool getNextIndexToFire(bool &allies, int &index);
 	void getFireDamage(bool alliesAttack, int alliesIndex, int enemyIndex, bool &doubleHit, bool &specialAttack, bool &ci, int &damage, bool &critical,bool &miss);
 	bool douldeHitTriggered(CharacterInfo *acttacker);  //是否触发二连
 	bool specialAttackTriggered(CharacterInfo *acttacker);	//是否触发特殊攻击
@@ -86,7 +86,12 @@ private:
 
 	float postCorrection();//
 
-	int temp;
-	int temp1;
+
+	//存放各船射程，用于计算炮击顺序。正数代表我方，负数代表敌方。
+	void  insertToRangeVector(Shooting_Range range, int index);
+	std::vector<int> exlongIndex;
+	std::vector<int> longIndex;
+	std::vector<int> midIndex;
+	std::vector<int> shortIndex;
 };
 #endif

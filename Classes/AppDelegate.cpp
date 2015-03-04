@@ -6,7 +6,7 @@
 #include "GameModel.h"
 USING_NS_CC;
 
-#define DEBUG_MODE true
+#define DEBUG_MODE false
 
 AppDelegate::AppDelegate() {
 

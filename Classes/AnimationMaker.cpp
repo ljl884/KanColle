@@ -2,7 +2,7 @@
 
 void DamageAnimation(Sprite* sprite,float delay);
 bool AnimationMaker::damageNumberInitialized = false;
-void AnimationMaker::playPlaneAnimation(Node* parent,float delay)
+float AnimationMaker::playPlaneAnimation(Node* parent,float delay)
 {
 	Sprite *plane1 = Sprite::create("item_up/055.png");
 	Sprite *plane2 = Sprite::create("item_up/113.png");
@@ -39,6 +39,8 @@ void AnimationMaker::playPlaneAnimation(Node* parent,float delay)
 	FiniteTimeAction *p3move4 = MoveTo::create(0.6, Point(1000, 150));
 	Sequence *s3 = Sequence::create(DelayTime::create(delay), p3move1, p3move2, p3move1, p3move4, NULL);
 	plane3->runAction(s3);
+
+	return 1.2;
 }
 float AnimationMaker::FlyToPositionAndFadeOut(Node* target, float delay, Point position,float stayingTime)
 {
@@ -53,7 +55,7 @@ float AnimationMaker::FlyToCenterLeftAndFadeOut(Node* target,float delay)
 {
 	return FlyToPositionAndFadeOut(target, delay, Point(220, 240),1);
 }
-void AnimationMaker::playAirBattleAnimation(Node* parent, float delay)
+float AnimationMaker::playAirBattleAnimation(Node* parent, float delay)
 {
 	int planeNumber = 3;
 	int x = 30;
@@ -84,6 +86,7 @@ void AnimationMaker::playAirBattleAnimation(Node* parent, float delay)
 		plane1->setPosition(100 - 30 * i, 300 - 35 * i);
 		parent->addChild(plane1);
 	}
+	return 3.6;
 }
 void AnimationMaker::makeExplodeAnimation()
 {

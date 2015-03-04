@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "CharacterInfo.h"
+#define MAX_SHIPS_PER_FLEET 6
 
 class Fleet{
 public:

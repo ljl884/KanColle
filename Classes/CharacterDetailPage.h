@@ -5,6 +5,7 @@
 #include "CharacterInfo.h"
 #include "Stars.h"
 #include "HpBar.h"
+#include "EquipmentContainer.h"
 
 using namespace cocos2d;
 class PortRemodeLayer;
@@ -39,7 +40,10 @@ private:
 	Sprite * speed;
 	Sprite * range;
 	
-	
+	EquipmentContainer *equipmentContainer1;
+	EquipmentContainer *equipmentContainer2;
+	EquipmentContainer *equipmentContainer3;
+	EquipmentContainer *equipmentContainer4;
 	
 	Stars * stars;
 

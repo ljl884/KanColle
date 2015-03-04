@@ -49,8 +49,9 @@ GameScene::GameScene(BattleModel *model)
 			enemy->setMaxHp(enemies[i]->maxHP);
 			battleEnemies.push_back(enemy);
 		}
-		fireBattle();
-
+		status = BattleStatus::firebattle;
+		//fireBattle();
+		BattleStart();
 		
 	}
 	else
@@ -76,10 +77,10 @@ void GameScene::onStatusOverCallBack(){
 	}
 	else if (status == BattleStatus::character)
 	{
-		status = BattleStatus::scout;
+		status = BattleStatus::scouting;
 		scoutStart();
 	}
-	else if (status == BattleStatus::scout)
+	else if (status == BattleStatus::scouting)
 	{
 		status = BattleStatus::enemy;
 		initEnemy();
@@ -94,6 +95,11 @@ void GameScene::onStatusOverCallBack(){
 		status = BattleStatus::firebattle;
 		fireBattle();
 	}
+	else if (status == BattleStatus::firebattle)
+	{
+		status = BattleStatus::dayEnd;
+		dayEnd();
+	}
 	else {
 		PortScene *p = new PortScene();
 		Director::getInstance()->replaceScene(p);
@@ -103,8 +109,8 @@ void GameScene::onStatusOverCallBack(){
 void GameScene::BattleStart()
 {	
 	hideLeftCornerBar();
-	auto *startBorderUp = Sprite::create("commonAssets/image 472.png");
-	auto *startBorderDown = Sprite::create("commonAssets/image 470.png");
+	startBorderUp = Sprite::create("commonAssets/image 472.png");
+	startBorderDown = Sprite::create("commonAssets/image 470.png");
 	startBorderDown->setPosition(400, 130);
 	startBorderUp->setPosition(400, 330);
 	this->addChild(startBorderDown);
@@ -115,15 +121,11 @@ void GameScene::BattleStart()
 
 	//animation
 	
-	auto *actionMoveUp = CCMoveTo::create(1, Point(400, 580));
-	auto *actionMoveDown = CCMoveTo::create(1, Point(400, -100));
-	auto *actionMoveLeft = CCMoveTo::create(0.6, Point(360, 240));
-	auto *actionFadeout = CCFadeOut::create(0.6);
-	auto action = Sequence::create(actionMoveUp,  NULL);
-	startBorderDown->runAction(actionMoveDown);
-	startBorderUp->runAction(action);
-	battleStart->runAction(actionFadeout);
-	battleStart->runAction(actionMoveLeft);
+
+	startBorderDown->runAction(CCMoveTo::create(1, Point(400, -100)));
+	startBorderUp->runAction(CCMoveTo::create(1, Point(400, 580)));
+	battleStart->runAction(CCFadeOut::create(0.6));
+	battleStart->runAction(CCMoveTo::create(0.6, Point(360, 240)));
 	
 	nextStatus(1);
 }
@@ -194,6 +196,7 @@ void GameScene::initLeftCornerBar()
 
 	leftCornerBar = Sprite::create("BattleMain/image 164.png");
 	leftCornerBar->setPosition(128, 427);
+	leftCornerBar->setZOrder(1);
 	//leftCornerBar->setVisible(false);
 	this->addChild(leftCornerBar);
 	if (nightFight)
@@ -201,6 +204,7 @@ void GameScene::initLeftCornerBar()
 	else
 	leftCornerCircle = Sprite::create("BattleMain/image 159.png");
 	leftCornerCircle->setPosition(18, 427);
+	leftCornerCircle->setZOrder(1);
 	auto *circleAction = RotateBy::create(1, 90);
 	auto *sequence = Sequence::create(circleAction, NULL);
 	auto *repeat = RepeatForever::create((ActionInterval*)sequence);
@@ -256,10 +260,15 @@ void GameScene::showLeftCornerBar(LeftCornerType type)
 		case GameScene::hangkongzhan:
 			leftCornerLable = Sprite::create("BattleMain/image 168.png");
 			break;
+		case GameScene::lituopanding:
+			leftCornerLable = Sprite::create("BattleMain/image 174.png");
+			break;
 		default:
 			break;
 		}
-		leftCornerLable->setPosition(65, 427);
+		leftCornerLable->setZOrder(1);
+		leftCornerLable->setPosition(40, 427);
+		leftCornerLable->setAnchorPoint(ccp(0, 0.5));
 		this->addChild(leftCornerLable);
 		auto *fadeIn3 = FadeIn::create(0.3);
 		leftCornerLable->runAction(fadeIn3);
@@ -351,8 +360,32 @@ void GameScene::scoutResult()
 }
 void GameScene::airBattle()
 {
+
+	//judge if air battle happens
+
+	bool airBattleHappens = false;
+	int firstCVindex;
+	std::vector<CharacterInfo*> allies = model->getAllies();
+	for (int i = allies.size()-1; i >=0; i--)
+	{
+		if (allies[i]->canAirBattle())
+		{
+			firstCVindex = i;
+			airBattleHappens = true;
+		}
+		
+	}
+
+	if (airBattleHappens == false)
+	{
+		nextStatus(0);
+		return;
+	}
+
+
+	//do air battle
 	showLeftCornerBar(hangkongzhan);
-	battleHeros[0]->showCloseUp(1.2);
+	battleHeros[firstCVindex]->showCloseUp(1.2);
 	showCloseUpBorder();
 	//plane anime
 	AnimationMaker::playPlaneAnimation(this,1.7);
@@ -362,10 +395,13 @@ void GameScene::airBattle()
 	bool doubleHit = false, ci = false, special = false, miss = false, critical = false;
 	int damage;
 	model->getFireDamage(true, 1, 2, doubleHit, special, ci, damage, critical, miss);
+	model->getEnemies()[2]->getDamage(damage);
 	battleEnemies[2]->receiveDamage(6.2, miss, critical, damage*3, 2);
 	model->getFireDamage(true, 1, 3, doubleHit, special, ci, damage, critical, miss);
+	model->getEnemies()[3]->getDamage(damage);
 	battleEnemies[3]->receiveDamage(6.2, miss, critical, damage*2, 1);
 	model->getFireDamage(true, 1, 5, doubleHit, special, ci, damage, critical, miss);
+	model->getEnemies()[5]->getDamage(damage);
 	battleEnemies[5]->receiveDamage(6.2, miss, critical, damage*3, 2);
 
 	nextStatus(3.5 + 3);
@@ -380,51 +416,141 @@ void GameScene::fireBattle()
 	float timePassed = 1;
 	
 
-	float delay1 = 0.5, delay2 = 1, delay3 = 2;
+	float delay1 = 0.5, delay2 = 1, delay3 = 1;
 
 	bool doubleHit = false, ci = false, special = false, miss = false, critical = false;
 	int damage = 10;
-	int nextAllies = model->getNextAlliesIndexToFire();
-	int nextEnemy = model->getNextEnemyIndexToFire();
-	while (nextAllies != -1 || nextEnemy != -1)
-	{
-		if (nextAllies!=-1)
-		{
-			if (battleHeros[nextAllies]->canAttack())
-			{
-				battleHeros[nextAllies]->stepOut(timePassed);
-				battleHeros[nextAllies]->showAttackingAnime(timePassed);
-				battleEnemies[nextEnemy]->stepOut(timePassed);
-				model->getFireDamage(true, nextAllies, nextEnemy, doubleHit, special, ci, damage, critical, miss);
 
-				battleEnemies[nextEnemy]->receiveDamage(timePassed + delay1, miss, critical, damage, 1);
-				battleEnemies[nextEnemy]->stepBack(timePassed + delay1);
-				battleHeros[nextAllies]->stepBack(timePassed + delay2);
-				timePassed += delay3; 
-			}
-		}
-		if (nextEnemy!=-1  )
-		{
-			if (battleEnemies[nextEnemy]->canAttack())
-			{
-				battleEnemies[nextEnemy]->stepOut(timePassed);
-				battleEnemies[nextEnemy]->showAttackingAnime(timePassed);
-				battleHeros[nextAllies]->stepOut(timePassed);
-				model->getFireDamage(false, nextAllies, nextEnemy, doubleHit, special, ci, damage, critical, miss);
-				battleHeros[nextAllies]->receiveDamage(timePassed + delay1, miss, critical, damage, 1);
-				battleHeros[nextAllies]->stepBack(timePassed + delay1);
-				battleEnemies[nextEnemy]->stepBack(timePassed + delay2);
-				timePassed += delay3; 
-			}
-			
-		}
-		nextEnemy = model->getNextEnemyIndexToFire();
-		nextAllies = model->getNextAlliesIndexToFire();
-	}
+	model->resetFireBattle();
+	bool fire, allieAttack=false;int index;
 	
-	timePassed += 3;
+	fire = model->getNextIndexToFire(allieAttack, index);
+	while (fire)
+	{
+		if (allieAttack &&  model->getAllies()[index]->canAttack())
+		{
+			battleHeros[index]->stepOut(timePassed);
+			delay1 = battleHeros[index]->showAttackingAnime(timePassed) - 0.35;
+			delay2 = delay1 + 0.5;
+			delay3 = delay1 + 1.5;
+			int targetIndex = model->getTargetIndex(allieAttack);
+			battleEnemies[targetIndex]->stepOut(timePassed);
+			model->getFireDamage(allieAttack, index, targetIndex, doubleHit, special, ci, damage, critical, miss);
+			if (!miss)
+				model->getEnemies()[targetIndex]->getDamage(damage);
+			battleEnemies[targetIndex]->receiveDamage(timePassed + delay1, miss, critical, damage, 1);
+			battleEnemies[targetIndex]->stepBack(timePassed + delay1);
+			battleHeros[index]->stepBack(timePassed + delay2);
+			timePassed += delay3;
+		}
+		else if (!allieAttack &&  model->getEnemies()[index]->canAttack())
+		{
+			battleEnemies[index]->stepOut(timePassed);
+			delay1 = battleEnemies[index]->showAttackingAnime(timePassed) - 0.35;
+			delay2 = delay1 + 0.5;
+			delay3 = delay1 + 1.5;
+			int targetIndex = model->getTargetIndex(allieAttack);
+			battleHeros[targetIndex]->stepOut(timePassed);
+			model->getFireDamage(allieAttack, targetIndex, index, doubleHit, special, ci, damage, critical, miss);
+			if (!miss)
+				model->getAllies()[targetIndex]->getDamage(damage);
+			battleHeros[targetIndex]->receiveDamage(timePassed + delay1, miss, critical, damage, 1);
+			battleHeros[targetIndex]->stepBack(timePassed + delay1);
+			battleEnemies[index]->stepBack(timePassed + delay2);
+			timePassed += delay3;
+		}
+		fire = model->getNextIndexToFire(allieAttack, index);
+	}
+
+	timePassed += 2.3;
 	//Second Round
+
+	//if BB exists, do second round
+	bool doSecondRound = false;
+	for (int i = 0; i < model->getAllies().size(); i++)
+	{
+		if (model->getAllies()[i]->type == BB || model->getAllies()[i]->type == BBCV)
+			doSecondRound = true;
+	}
+		
+	for (int i = 0; i < model->getEnemies().size(); i++)
+	{
+		if (model->getEnemies()[i]->type == BB || model->getEnemies()[i]->type == BBCV)
+			doSecondRound = true;
+	}
+		
+
+	if (doSecondRound)
+	{
+		for (int i = 0; i < MAX_SHIPS_PER_FLEET; i++)
+		{
+			int index = i;
+			while (!model->getAllies()[index]->canAttack() && index < (model->getAllies().size()-1))
+				index++;
+			if (model->getAllies()[index]->canAttack())
+			{
+				battleHeros[index]->stepOut(timePassed);
+				delay1 = battleHeros[index]->showAttackingAnime(timePassed) - 0.35;
+				delay2 = delay1 + 0.5;
+				delay3 = delay1 + 2;
+				battleEnemies[index]->stepOut(timePassed);
+				model->getFireDamage(true, index, index, doubleHit, special, ci, damage, critical, miss);
+				if (!miss)
+					model->getEnemies()[index]->getDamage(damage);
+				battleEnemies[index]->receiveDamage(timePassed + delay1, miss, critical, damage, 1);
+				battleEnemies[index]->stepBack(timePassed + delay1);
+				battleHeros[index]->stepBack(timePassed + delay2);
+				timePassed += delay3;
+			}
+			index = i;
+			while (!model->getEnemies()[index]->canAttack() && index < (model->getEnemies().size() - 1))
+				index++;
+			if ( model->getEnemies()[index]->canAttack())
+			{
+				battleEnemies[index]->stepOut(timePassed);
+				delay1 = battleEnemies[index]->showAttackingAnime(timePassed) - 0.35;
+				delay2 = delay1 + 0.5;
+				delay3 = delay1 + 2;
+				battleHeros[index]->stepOut(timePassed);
+				model->getFireDamage(false, index, index, doubleHit, special, ci, damage, critical, miss);
+				if (!miss)
+					model->getAllies()[index]->getDamage(damage);
+				battleHeros[index]->receiveDamage(timePassed + delay1, miss, critical, damage, 1);
+				battleHeros[index]->stepBack(timePassed + delay1);
+				battleEnemies[index]->stepBack(timePassed + delay2);
+				timePassed += delay3;
+			}
+		}
+	}
 
 	nextStatus(timePassed);
 	
+}
+
+void GameScene::dayEnd()
+{
+	showLeftCornerBar(lituopanding);
+	startBorderUp->setZOrder(1);
+	startBorderDown->setZOrder(1);
+	startBorderUp->setTexture("commonAssets/image 473.png");
+	startBorderDown->setTexture("commonAssets/image 471.png");
+	startBorderUp->runAction(MoveTo::create(1, ccp(400, 352)));
+	startBorderDown->runAction(MoveTo::create(1, ccp(400, 130)));
+	startBorderDown->setScaleY(1.05);
+	startBorderUp->setScaleY(1.05);
+
+	auto escape = MenuItemImage::create("BattleMain/image 2.png","BattleMain/image 9.png");
+	auto nightBattle = MenuItemImage::create("BattleMain/image 12.png", "BattleMain/image 14.png");
+	escape->setPosition(300, 240);
+	nightBattle->setPosition(500, 240);
+	escape->setOpacity(0);
+	nightBattle->setOpacity(0);
+	escape->runAction(Sequence::create(DelayTime::create(0.8), FadeIn::create(0.5), NULL));
+	nightBattle->runAction(Sequence::create(DelayTime::create(0.8), FadeIn::create(0.5), NULL));
+	auto menu = Menu::create(escape, nightBattle,NULL);
+	this->addChild(menu);
+	menu->setPosition(Point::ZERO);
+	menu->setZOrder(2);
+
+	nextStatus(5);
 }

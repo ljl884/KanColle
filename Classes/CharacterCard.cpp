@@ -29,8 +29,9 @@ void CharacterCard::initCard()
 	shader = Sprite::create();
 	brokenMark = Sprite::create();
 	this->addChild(mainImage);
-	this->addChild(brokenMark);
+	
 	this->addChild(shader);
+	this->addChild(brokenMark);
 }
 void CharacterCard::updateCharacter(std::string resourceFolder, BrokenType type)
 {
@@ -61,6 +62,10 @@ void CharacterCard::setBrokenMark(BrokenType brokenType)
 {
 	switch (brokenType)
 	{
+	case BrokenType::normal:
+		brokenMark->setTexture("");
+		shader->setTexture("");
+		break;
 	case BrokenType::tiny:
 		brokenMark->setTexture("commonAssets/image 344.png");
 		shader->setTexture("commonAssets/image 367.png");
@@ -75,7 +80,7 @@ void CharacterCard::setBrokenMark(BrokenType brokenType)
 		break;
 	case BrokenType::drown:
 		brokenMark->setTexture("commonAssets/image 350.png");
-		mainImage->setColor(Color3B(90, 90, 96));//GRAY
+		mainImage->setColor(Color3B(192, 192, 192));//GRAY
 		shader->setTexture("commonAssets/image 371.png");
 		break;
 	default:

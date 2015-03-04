@@ -67,10 +67,10 @@ CharacterListPage::CharacterListPage(PortOrganizeLayer* parent)
 	nextPage->setPosition(685, 33);
 	auto lastPage = MenuItemImage::create("commonAssets/image 193.png", "commonAssets/image 193.png");
 	lastPage->setPosition(720, 33);
-	auto Page1 = MenuItemLabel::create(Label::create("1", "fonts/DengXian.ttf", 16));
+	auto Page1 = MenuItemLabel::create(Label::create("1", "fonts/DengXian.ttf", 16),CC_CALLBACK_1(CharacterListPage::setPageCallback,this,0));
 	Page1->setPosition(502, 33);
 	Page1->setColor(Color3B(0,127,255));
-	auto Page2 = MenuItemLabel::create(Label::create("2", "fonts/DengXian.ttf", 16));
+	auto Page2 = MenuItemLabel::create(Label::create("2", "fonts/DengXian.ttf", 16), CC_CALLBACK_1(CharacterListPage::setPageCallback, this, 1));
 	Page2->setPosition(539, 33);
 	Page2->setColor(FONT_COLOR);
 	auto Page3 = MenuItemLabel::create(Label::create("3", "fonts/DengXian.ttf", 16));
@@ -104,6 +104,8 @@ void CharacterListPage::updateList(int page)
 	list->removeAllChildren();
 	for (int i = 0; i < SHIPS_PER_PAGE; i++)
 	{
+		if ((SHIPS_PER_PAGE*page + i) == ships.size() )
+			return;
 		auto row = makeRow(ships[SHIPS_PER_PAGE*page + i]);
 		displayingCharacters.push_back(ships[SHIPS_PER_PAGE*page + i]);
 		
@@ -217,4 +219,8 @@ void CharacterListPage::exchangeCallback(Ref* pSender, int indexInList)
 	this->updateList(currentPage);
 	this->moveOut();
 	parent->updateContainers();
+}
+void CharacterListPage::setPageCallback(Ref* PSendr, int page)
+{
+	this->updateList(page);
 }

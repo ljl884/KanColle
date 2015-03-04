@@ -11,6 +11,7 @@ public:
 	CharacterListPage(PortOrganizeLayer *parent);
 	void sortButtonCallback	(Ref* pSender);
 	void exchangeCallback(Ref* pSender,int indexInList);
+	void setPageCallback(Ref* PSendr, int page);
 	void moveOut();
 	void moveIn();
 	inline bool isHidden(){ return Hidden; }

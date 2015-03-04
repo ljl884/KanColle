@@ -47,6 +47,10 @@ protected:
 	Label *nameLabel;
 	Label *levelLabel;
 	Label *armourLabel;
+	Sprite *equipment1;
+	Sprite *equipment2;
+	Sprite* equipment3;
+	Sprite* equipment4;
 	
 	virtual void ThreeDigitMode(){};
 	virtual void setBroken(BrokenType type);

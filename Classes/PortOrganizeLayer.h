@@ -7,11 +7,11 @@
 #include "CharacterListPage.h"
 #include "GameModel.h"
 using namespace cocos2d;
-
+class PortScene;
 class PortOrganizeLayer : public Layer
 {
 public:
-	PortOrganizeLayer(Node *parent);
+	PortOrganizeLayer(PortScene *parent);
 	void selectFleet(Ref* pSender, int fleetIndex);
 	void clearFleet(Ref* pSender);
 	void hideDetail(Ref* pSender);
@@ -22,7 +22,7 @@ public:
 	inline int getSelectedShipIndex(){ return selectedShipIndex; }
 	inline void setSelectedShipIndex(int index){ this->selectedShipIndex = index; }
 private:
-	Node * parent;
+	PortScene * parent;
 	CharacterDetailPage * detailPage;
 	CharacterListPage * listPage;
 	MenuItemSprite * hideDetailItem;
