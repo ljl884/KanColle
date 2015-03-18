@@ -9,6 +9,7 @@ class Formation : public Node{
 public:
 	Formation(int shipCount, FormationType type);
 	Formation(int shipCount, FormationType type,bool isEnemy);
+	void initialPanel();
 	FormationType getType();
 	void addBattleBorder();
 	void showPoints();

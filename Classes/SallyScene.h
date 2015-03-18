@@ -5,6 +5,7 @@
 #include "Mission.h"
 #include "Compass.h"
 #include "GameModel.h"
+#include "formation.h"
 using namespace cocos2d;
 
 enum SallyStatus{
