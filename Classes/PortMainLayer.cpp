@@ -50,7 +50,7 @@ void PortMainLayer::initLayer()
 
 void PortMainLayer::initMenu()
 {
-	auto battleButton = MenuItemImage::create("PortMain/image 407.png", "PortMain/image 407.png", CC_CALLBACK_1(PortMainLayer::battleCallback, this));
+	auto battleButton = MenuItemImage::create("PortMain/image 407.png", "PortMain/image 407.png", CC_CALLBACK_1(PortMainLayer::layerSelectCallback, this,LayerType::battle));
 	battleButton->setPosition((145+(300-145)/2), 210);
 	Sprite* battleButtonShip = Sprite::create("PortMain/image 408.png");
 	Sprite* battleButtonGo = Sprite::create("PortMain/image 409.png");
@@ -105,9 +105,7 @@ void  PortMainLayer::menuCallback(Ref* pSender)
 }
 void PortMainLayer::battleCallback(Ref* pSender)
 {
-	auto model = new BattleModel(GameModel::getInstance()->getFleet(0),new Fleet(5),DanZong,LunXing);
-	auto scene = new GameScene(model);
-	Director::getInstance()->replaceScene(scene);
+	
 }
 void PortMainLayer::layerSelectCallback(Ref * pSender,LayerType type)
 {

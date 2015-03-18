@@ -7,6 +7,7 @@
 #include "PortRepairLayer.h"
 #include "PortSupplyLayer.h"
 #include "LayerSelecter.h"
+#include "PortBattleLayer.h"
 PortScene* PortScene::createScene()
 {
 	auto *scene = new PortScene();
@@ -21,6 +22,7 @@ PortScene::PortScene()
 	remodelayer = nullptr;
 	supplylayer = nullptr;
 	organizelayer = nullptr;
+	battlelayer = nullptr;
 	black = nullptr;
 	title = nullptr;
 	currentLayerType = empty;
@@ -51,6 +53,25 @@ void PortScene::setCurrentLayer(LayerType type)
 		mainlayer->setVisible(true);
 		currentLayerType = LayerType::main;
 		
+		break;
+	case battle:
+		if (currentLayerType == LayerType::battle)
+			return;
+		if (title!= nullptr)
+			title->setTexture("PortMain/image 295.png");
+		layerSelecter->MoveIn();
+		if (battlelayer == nullptr)
+		{
+			battlelayer = new PortBattleLayer(this);
+			this->addChild(battlelayer);
+		}
+		if (currentLayerType != LayerType::empty)
+			currentLayer->setVisible(false);
+		currentLayer = battlelayer;
+		currentLayer->setZOrder(-1);
+		battlelayer->setVisible(true);
+		battlelayer->hideMissionPage();
+		currentLayerType = LayerType::battle;
 		break;
 	case organize:
 		if (currentLayerType == LayerType::organize)
@@ -142,8 +163,7 @@ void PortScene::setCurrentLayer(LayerType type)
 		repairlayer->setVisible(true);
 		currentLayerType = LayerType::repair;
 		break;
-	case battle:
-		break;
+	
 	default:
 		break;
 	}

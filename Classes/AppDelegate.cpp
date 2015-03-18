@@ -6,7 +6,7 @@
 #include "GameModel.h"
 USING_NS_CC;
 
-#define DEBUG_MODE false
+#define DEBUG_MODE true
 
 AppDelegate::AppDelegate() {
 
@@ -54,7 +54,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	if (DEBUG_MODE){
 		auto s = PortScene::createScene();
-		s->setCurrentLayer(organize);
+		s->setCurrentLayer(battle);
 		director->runWithScene(s);
 
 	}

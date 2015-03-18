@@ -39,6 +39,7 @@ private:
 	void airBattle();
 	void fireBattle();
 	void dayEnd();
+	
 
 	void nextStatus(float DelayTime);
 

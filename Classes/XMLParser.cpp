@@ -16,6 +16,10 @@ XMLParser::XMLParser()
 	std::string xmlFile3 = FileUtils::getInstance()->fullPathForFilename("Data/Equipment.xml").c_str();
 	unsigned char* pBuffer3 = FileUtils::sharedFileUtils()->getFileData(xmlFile3.c_str(), "rb", &bufferSize);
 	equipmentDoc.Parse((const char*)pBuffer3);
+
+	std::string xmlFile4 = FileUtils::getInstance()->fullPathForFilename("Data/Mission.xml").c_str();
+	unsigned char* pBuffer4 = FileUtils::sharedFileUtils()->getFileData(xmlFile4.c_str(), "rb", &bufferSize);
+	missionDoc.Parse((const char*)pBuffer4);
 }
 Equipment* XMLParser::loadEquipmentInfo(std::string id)
 {
@@ -212,7 +216,46 @@ CharacterInfo* XMLParser::loadCharacterInfo(std::string name)
 	return CharacterInfo::makeDefaultInfo();
 }
 
+Mission* XMLParser::loadMissionInfo(std::string id)
+{
+	auto mission = new Mission();
 
+	tinyxml2::XMLElement *node = findNodeByName(id, ScriptType::mission);
+	if (node != NULL)
+	{
+		mission->id = id;
+		mission->areaId = atoi( node->FirstChildElement("area")->GetText());
+		mission->index = atoi(node->FirstChildElement("index")->GetText());
+		mission->name = node->FirstChildElement("name")->GetText();
+		mission->missionName = node->FirstChildElement("missionName")->GetText();
+		mission->detail = node->FirstChildElement("Detail")->GetText();
+
+		//MissionNode
+		tinyxml2::XMLElement *missionnode = node->FirstChildElement("Node");
+		while (missionnode != NULL)
+		{
+			auto newMissionNode = new MissionNode();
+			newMissionNode->setType(missionnode->FirstChildElement("type")->GetText());
+			newMissionNode->position = 
+				Point(atoi(missionnode->FirstChildElement("positionX")->GetText()),
+					  atoi(missionnode->FirstChildElement("positionY")->GetText()));
+			tinyxml2::XMLElement *directionNode = missionnode->FirstChildElement("direction");
+			if (directionNode != NULL)
+				newMissionNode->compassDirection = Compass::parseDirection(directionNode->GetText());
+			tinyxml2::XMLElement *enemyFleetNode= missionnode->FirstChildElement("enemy");
+			if (enemyFleetNode != NULL)
+				newMissionNode->parseEnemyFleet(enemyFleetNode->GetText());
+			int parentIndex = atoi(missionnode->FirstChildElement("parent")->GetText());
+			if (parentIndex != -1)
+				mission->nodes[parentIndex]->children.push_back(newMissionNode);
+			mission->nodes.push_back(newMissionNode);
+			missionnode = missionnode->NextSiblingElement();
+
+		}
+
+	}
+	return mission;
+}
 tinyxml2::XMLElement* XMLParser::findNodeByName(std::string name, ScriptType type)
 {
 	const char* nodeName;
@@ -233,6 +276,10 @@ tinyxml2::XMLElement* XMLParser::findNodeByName(std::string name, ScriptType typ
 		doc = &this->equipmentDoc;
 		nameOrId = "id";
 		break;
+	case mission:
+		nodeName = "Mission";
+		doc = &this->missionDoc;
+		nameOrId = "id";
 	default:
 		break;
 	}

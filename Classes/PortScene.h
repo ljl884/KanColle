@@ -10,6 +10,7 @@ class PortRemodeLayer;
 class PortRepairLayer;
 class PortSupplyLayer;
 class LayerSelecter;
+class PortBattleLayer;
 using namespace cocos2d;
 
 enum LayerType{
@@ -49,6 +50,7 @@ private:
 	PortRemodeLayer *remodelayer;
 	PortRepairLayer *repairlayer;
 	PortSupplyLayer *supplylayer;
+	PortBattleLayer *battlelayer;
 
 	Sprite *bgImage;
 

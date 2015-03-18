@@ -59,3 +59,31 @@ std::string Helper::getShipType(Ship_Type type)
 		break;
 	}
 }
+std::string Helper::getMissionId(int areaId, int index)
+{
+	int realIndex = index + 1;
+	std::string id = int2str(areaId) + "-" + int2str(realIndex);
+	return id;
+}
+void Helper::split(const std::string& src, const std::string& separator, std::vector<std::string>& dest)
+{
+	std::string str = src;
+	std::string substring;
+	std::string::size_type start = 0, index;
+
+	do
+	{
+		index = str.find_first_of(separator, start);
+		if (index != std::string::npos)
+		{
+			substring = str.substr(start, index - start);
+			dest.push_back(substring);
+			start = str.find_first_not_of(separator, index);
+			if (start == std::string::npos) return;
+		}
+	} while (index != std::string::npos);
+
+	//the last token
+	substring = str.substr(start);
+	dest.push_back(substring);
+}

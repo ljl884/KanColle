@@ -2,7 +2,7 @@
 #include "AnimationMaker.h"
 #include "PortScene.h"
 
-#define DEBUG false
+#define DEBUG true
 
 GameScene::GameScene(BattleModel *model)
 {
@@ -49,9 +49,9 @@ GameScene::GameScene(BattleModel *model)
 			enemy->setMaxHp(enemies[i]->maxHP);
 			battleEnemies.push_back(enemy);
 		}
-		status = BattleStatus::firebattle;
-		//fireBattle();
-		BattleStart();
+		//status = BattleStatus::firebattle;
+		fireBattle();
+		//BattleStart();
 		
 	}
 	else
@@ -101,8 +101,8 @@ void GameScene::onStatusOverCallBack(){
 		dayEnd();
 	}
 	else {
-		PortScene *p = new PortScene();
-		Director::getInstance()->replaceScene(p);
+		
+		Director::getInstance()->popScene();
 	}
 
 }
@@ -422,18 +422,24 @@ void GameScene::fireBattle()
 	int damage = 10;
 
 	model->resetFireBattle();
-	bool fire, allieAttack=false;int index;
+	bool fire=false, allieAttack=false;int index;
 	
 	fire = model->getNextIndexToFire(allieAttack, index);
 	while (fire)
 	{
 		if (allieAttack &&  model->getAllies()[index]->canAttack())
 		{
+			int targetIndex = model->getTargetIndex(allieAttack);
+			if (targetIndex == -1){
+				nextStatus(timePassed + 2);
+				return;//WIN
+			}
 			battleHeros[index]->stepOut(timePassed);
 			delay1 = battleHeros[index]->showAttackingAnime(timePassed) - 0.35;
 			delay2 = delay1 + 0.5;
 			delay3 = delay1 + 1.5;
-			int targetIndex = model->getTargetIndex(allieAttack);
+			
+
 			battleEnemies[targetIndex]->stepOut(timePassed);
 			model->getFireDamage(allieAttack, index, targetIndex, doubleHit, special, ci, damage, critical, miss);
 			if (!miss)
@@ -445,11 +451,16 @@ void GameScene::fireBattle()
 		}
 		else if (!allieAttack &&  model->getEnemies()[index]->canAttack())
 		{
+			int targetIndex = model->getTargetIndex(allieAttack);
+			if (targetIndex == -1){
+				nextStatus(timePassed + 2);
+				return; //GAMEOVER
+			}
 			battleEnemies[index]->stepOut(timePassed);
 			delay1 = battleEnemies[index]->showAttackingAnime(timePassed) - 0.35;
 			delay2 = delay1 + 0.5;
 			delay3 = delay1 + 1.5;
-			int targetIndex = model->getTargetIndex(allieAttack);
+			
 			battleHeros[targetIndex]->stepOut(timePassed);
 			model->getFireDamage(allieAttack, targetIndex, index, doubleHit, special, ci, damage, critical, miss);
 			if (!miss)
@@ -460,6 +471,7 @@ void GameScene::fireBattle()
 			timePassed += delay3;
 		}
 		fire = model->getNextIndexToFire(allieAttack, index);
+		
 	}
 
 	timePassed += 2.3;
@@ -480,11 +492,12 @@ void GameScene::fireBattle()
 	}
 		
 
-	if (doSecondRound)
+	if (false)
 	{
+		
 		for (int i = 0; i < MAX_SHIPS_PER_FLEET; i++)
 		{
-			int index = i;
+			index = i;
 			while (!model->getAllies()[index]->canAttack() && index < (model->getAllies().size()-1))
 				index++;
 			if (model->getAllies()[index]->canAttack())
@@ -492,13 +505,14 @@ void GameScene::fireBattle()
 				battleHeros[index]->stepOut(timePassed);
 				delay1 = battleHeros[index]->showAttackingAnime(timePassed) - 0.35;
 				delay2 = delay1 + 0.5;
-				delay3 = delay1 + 2;
-				battleEnemies[index]->stepOut(timePassed);
-				model->getFireDamage(true, index, index, doubleHit, special, ci, damage, critical, miss);
+				delay3 = delay1 + 1.5;
+				int targetIndex = model->getTargetIndex(allieAttack);
+				battleEnemies[targetIndex]->stepOut(timePassed);
+				model->getFireDamage(allieAttack, index, targetIndex, doubleHit, special, ci, damage, critical, miss);
 				if (!miss)
-					model->getEnemies()[index]->getDamage(damage);
-				battleEnemies[index]->receiveDamage(timePassed + delay1, miss, critical, damage, 1);
-				battleEnemies[index]->stepBack(timePassed + delay1);
+					model->getEnemies()[targetIndex]->getDamage(damage);
+				battleEnemies[targetIndex]->receiveDamage(timePassed + delay1, miss, critical, damage, 1);
+				battleEnemies[targetIndex]->stepBack(timePassed + delay1);
 				battleHeros[index]->stepBack(timePassed + delay2);
 				timePassed += delay3;
 			}
@@ -510,13 +524,14 @@ void GameScene::fireBattle()
 				battleEnemies[index]->stepOut(timePassed);
 				delay1 = battleEnemies[index]->showAttackingAnime(timePassed) - 0.35;
 				delay2 = delay1 + 0.5;
-				delay3 = delay1 + 2;
-				battleHeros[index]->stepOut(timePassed);
-				model->getFireDamage(false, index, index, doubleHit, special, ci, damage, critical, miss);
+				delay3 = delay1 + 1.5;
+				int targetIndex = model->getTargetIndex(allieAttack);
+				battleHeros[targetIndex]->stepOut(timePassed);
+				model->getFireDamage(allieAttack, targetIndex, index, doubleHit, special, ci, damage, critical, miss);
 				if (!miss)
-					model->getAllies()[index]->getDamage(damage);
-				battleHeros[index]->receiveDamage(timePassed + delay1, miss, critical, damage, 1);
-				battleHeros[index]->stepBack(timePassed + delay1);
+					model->getAllies()[targetIndex]->getDamage(damage);
+				battleHeros[targetIndex]->receiveDamage(timePassed + delay1, miss, critical, damage, 1);
+				battleHeros[targetIndex]->stepBack(timePassed + delay1);
 				battleEnemies[index]->stepBack(timePassed + delay2);
 				timePassed += delay3;
 			}
@@ -554,3 +569,4 @@ void GameScene::dayEnd()
 
 	nextStatus(5);
 }
+
