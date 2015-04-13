@@ -1,5 +1,6 @@
 #include"PortScene.h"	
 #include "GameModel.h"
+#include "Helper.h"
 #include "PortMainLayer.h"
 #include "PortFactoryLayer.h"
 #include "PortOrganizeLayer.h"
@@ -183,7 +184,7 @@ void PortScene::layerSwithEffect()
 bool PortScene::init()
 {
 
-	
+	GameModel* model = GameModel::getInstance();
 
 
 	bgImage = Sprite::create("PortMain/image 345.jpg");
@@ -293,12 +294,14 @@ bool PortScene::init()
 
 	//resources
 
+	
+
 	Sprite *iconfr = Sprite::create("PortMain/image 161.png");
 	iconfr->setPosition(670,462);
 	this->addChild(iconfr);
 
 	quickRepairCount = Label::create();
-	quickRepairCount->setString("954");
+	quickRepairCount->setString(Helper::int2str(model->getQuickRepair()));
 	quickRepairCount->setPosition(710, 462);
 	this->addChild(quickRepairCount);
 
@@ -307,7 +310,7 @@ bool PortScene::init()
 	this->addChild(icondt);
 
 	devToolCount = Label::create();
-	devToolCount->setString("687");
+	devToolCount->setString(Helper::int2str(model->getDevTool()));
 	devToolCount->setPosition(780, 462);
 	this->addChild(devToolCount);
 
@@ -331,10 +334,10 @@ bool PortScene::init()
 	labelSteel = Label::create();
 	labelAmmo = Label::create();
 	labelAluminium = Label::create();
-	labelFuel->setString("9842417");
-	labelSteel->setString("9852714");
-	labelAmmo->setString("5987145");
-	labelAluminium->setString("9664571");
+	labelFuel->setString(Helper::int2str(model->getFuel()));
+	labelSteel->setString(Helper::int2str(model->getSteel()));
+	labelAmmo->setString(Helper::int2str(model->getAmmo()));
+	labelAluminium->setString(Helper::int2str(model->getAluminium()));
 	labelFuel->setAlignment(TextHAlignment::RIGHT);
 	labelSteel->setAlignment(TextHAlignment::RIGHT);
 	labelAmmo->setAlignment(TextHAlignment::RIGHT);

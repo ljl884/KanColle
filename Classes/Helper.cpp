@@ -1,7 +1,7 @@
 #include "Helper.h"
 #include "CharacterInfo.h"
 
-std::string Helper::int2str(int &i) {
+std::string Helper::int2str(int i) {
 	std::string s;
 	std::stringstream ss(s);
 	ss << i;

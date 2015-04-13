@@ -4,7 +4,12 @@
 #include "Fleet.h"
 #define MAX_FLEET_NUMBER 4
 
-
+#define INIT_FUEL 100
+#define INIT_STEEL 100
+#define INIT_AMMO 100
+#define INIT_ALUMINUM 100
+#define INIT_REPAIR 10
+#define INIT_DEVTOOL 10
 
 class GameModel{
 public:
@@ -27,9 +32,19 @@ public:
 	inline int getDevTool(){ return devTool; }
 	inline int getQuickRepair(){ return quickRepair; }
 
+	void updateFuel(int fuel);
+	void updateSteel(int steel);
+	void updateAmmo(int ammo);
+	void updateAluminium(int aluminium);
+	void updateDevTool(int devTool);
+	void updateQuickRepair(int quickRepair);
+
 private:
 	GameModel();
 	bool isSaveFileExist();
+	void initialSaveFile();
+	void getDataFromSaveFile();
+
 	static GameModel* instance;
 	std::vector<Fleet*> fleets;
 	std::vector<CharacterInfo*> allShips;

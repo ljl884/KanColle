@@ -5,13 +5,14 @@ GameModel * GameModel::instance = NULL;
 class GirlFirend;
 GameModel::GameModel()
 {
-
+	getDataFromSaveFile();
 	nextShipId = 0;
 	nextEquipmentId = 0;
 	for (int i = 0; i < MAX_FLEET_NUMBER; i++)
 	{
 		fleets.push_back(new Fleet(i));
 	}
+	
 	
 	
 
@@ -42,6 +43,62 @@ bool GameModel::isSaveFileExist()
 	}
 	else
 		return true;
+}
+void GameModel::initialSaveFile()
+{
+	UserDefault::sharedUserDefault()->setIntegerForKey("fuel", INIT_FUEL);
+	UserDefault::sharedUserDefault()->setIntegerForKey("steel", INIT_STEEL);
+	UserDefault::sharedUserDefault()->setIntegerForKey("ammo", INIT_AMMO);
+	UserDefault::sharedUserDefault()->setIntegerForKey("aluminum", INIT_ALUMINUM);
+	UserDefault::sharedUserDefault()->setIntegerForKey("quickRepair", INIT_REPAIR);
+	UserDefault::sharedUserDefault()->setIntegerForKey("devTool", INIT_DEVTOOL);
+
+	
+
+}
+void GameModel::getDataFromSaveFile()
+{
+	if (!isSaveFileExist())
+	{
+		initialSaveFile();
+	}
+	this->fuel = UserDefault::sharedUserDefault()->getIntegerForKey("fuel");
+	this->steel = UserDefault::sharedUserDefault()->getIntegerForKey("steel");
+	this->ammo = UserDefault::sharedUserDefault()->getIntegerForKey("ammo");
+	this->aluminium = UserDefault::sharedUserDefault()->getIntegerForKey("aluminum");
+	this->quickRepair = UserDefault::sharedUserDefault()->getIntegerForKey("quickRepair");
+	this->devTool = UserDefault::sharedUserDefault()->getIntegerForKey("devTool");
+}
+
+void GameModel::updateFuel(int fuel)
+{
+	this->fuel = fuel;
+	UserDefault::sharedUserDefault()->setIntegerForKey("fuel", fuel);
+}
+void GameModel::updateSteel(int steel)
+{
+	this->steel = steel;
+	UserDefault::sharedUserDefault()->setIntegerForKey("steel", steel);
+}
+void GameModel::updateAmmo(int ammo)
+{
+	this->ammo = ammo;
+	UserDefault::sharedUserDefault()->setIntegerForKey("ammo", ammo);
+}
+void GameModel::updateAluminium(int aluminium)
+{
+	this->aluminium = aluminium;
+	UserDefault::sharedUserDefault()->setIntegerForKey("aluminium", aluminium);
+}
+void GameModel::updateDevTool(int devTool)
+{
+	this->devTool = devTool;
+	UserDefault::sharedUserDefault()->setIntegerForKey("devTool", devTool);
+}
+void GameModel::updateQuickRepair(int quickRepair)
+{
+	this->quickRepair = quickRepair;
+	UserDefault::sharedUserDefault()->setIntegerForKey("quickRepair", quickRepair);
 }
 void GameModel::setupInitData()
 {

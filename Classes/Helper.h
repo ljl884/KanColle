@@ -8,7 +8,7 @@ enum Ship_Type;
 
 class Helper{
 public:
-	static std::string int2str(int &i);
+	static std::string int2str(int i);
 	static std::string getString(std::string name);
 	static std::string getShipType(Ship_Type type);
 	static std::string getMissionId(int areaId, int index);
