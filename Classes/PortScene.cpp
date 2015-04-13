@@ -287,7 +287,7 @@ bool PortScene::init()
 	this->addChild(shipCountLabel);
 
 	shipCount = Label::create();
-	shipCount->setString("48");
+	shipCount->setString("300");
 	shipCount->setPosition(640, 462);
 	this->addChild(shipCount);
 
@@ -298,7 +298,7 @@ bool PortScene::init()
 	this->addChild(iconfr);
 
 	quickRepairCount = Label::create();
-	quickRepairCount->setString("48");
+	quickRepairCount->setString("954");
 	quickRepairCount->setPosition(710, 462);
 	this->addChild(quickRepairCount);
 
@@ -307,7 +307,7 @@ bool PortScene::init()
 	this->addChild(icondt);
 
 	devToolCount = Label::create();
-	devToolCount->setString("48");
+	devToolCount->setString("687");
 	devToolCount->setPosition(780, 462);
 	this->addChild(devToolCount);
 
@@ -331,10 +331,10 @@ bool PortScene::init()
 	labelSteel = Label::create();
 	labelAmmo = Label::create();
 	labelAluminium = Label::create();
-	labelFuel->setString("2411");
-	labelSteel->setString("2411");
-	labelAmmo->setString("2411");
-	labelAluminium->setString("2411");
+	labelFuel->setString("9842417");
+	labelSteel->setString("9852714");
+	labelAmmo->setString("5987145");
+	labelAluminium->setString("9664571");
 	labelFuel->setAlignment(TextHAlignment::RIGHT);
 	labelSteel->setAlignment(TextHAlignment::RIGHT);
 	labelAmmo->setAlignment(TextHAlignment::RIGHT);

@@ -2,7 +2,7 @@
 #include "AnimationMaker.h"
 #include "PortScene.h"
 
-#define DEBUG true
+#define DEBUG false
 
 GameScene::GameScene(BattleModel *model)
 {
@@ -394,15 +394,22 @@ void GameScene::airBattle()
 	//TODO damage
 	bool doubleHit = false, ci = false, special = false, miss = false, critical = false;
 	int damage;
-	model->getFireDamage(true, 1, 2, doubleHit, special, ci, damage, critical, miss);
-	model->getEnemies()[2]->getDamage(damage);
-	battleEnemies[2]->receiveDamage(6.2, miss, critical, damage*3, 2);
-	model->getFireDamage(true, 1, 3, doubleHit, special, ci, damage, critical, miss);
-	model->getEnemies()[3]->getDamage(damage);
-	battleEnemies[3]->receiveDamage(6.2, miss, critical, damage*2, 1);
-	model->getFireDamage(true, 1, 5, doubleHit, special, ci, damage, critical, miss);
-	model->getEnemies()[5]->getDamage(damage);
-	battleEnemies[5]->receiveDamage(6.2, miss, critical, damage*3, 2);
+	model->getFireDamage(true, 1, 0, doubleHit, special, ci, damage, critical, miss);
+	model->getEnemies()[0]->getDamage(damage);
+	battleEnemies[0]->receiveDamage(6.2, miss, critical, damage*3, 2);
+
+	if (battleEnemies.size() > 3){
+		model->getFireDamage(true, 1, 3, doubleHit, special, ci, damage, critical, miss);
+		model->getEnemies()[3]->getDamage(damage);
+		battleEnemies[3]->receiveDamage(6.2, miss, critical, damage * 2, 1);
+	}
+	
+	if (battleEnemies.size() > 5){
+		model->getFireDamage(true, 1, 5, doubleHit, special, ci, damage, critical, miss);
+		model->getEnemies()[5]->getDamage(damage);
+		battleEnemies[5]->receiveDamage(6.2, miss, critical, damage * 3, 2);
+	}
+
 
 	nextStatus(3.5 + 3);
 

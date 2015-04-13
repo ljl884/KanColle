@@ -1,5 +1,21 @@
 #include"formation.h"
-
+#include "SallyScene.h"
+Formation::Formation( FormationType type,SallyScene* parent)
+{
+	this->type = type;
+	
+	shipCount = MAX_SHIPS_PER_FLEET;
+	for (int i = 0; i < shipCount; i++){
+		Sprite *temp = Sprite::create("BattleMain/image 686.png");
+		temp->setVisible(false);
+		points.push_back(temp);
+		this->addChild(temp);
+	}
+	organizePoints();
+	showPoints();
+	initializePanel(parent);
+	rotatePoints();
+}
 Formation::Formation(int shipCount, FormationType type)
 {
 	this->type = type;
@@ -53,11 +69,13 @@ void Formation::organizePoints(){
 		danzong();		
 		break;
 	case FuZong:
+		fuzong();
 		break;
 	case LunXing:
 		lunxing();
 		break;
 	case TiXing:
+		tixing();
 		break;
 	case DanHeng:
 		danheng();
@@ -104,13 +122,48 @@ void Formation::danzong()
 		}
 	}
 }
+void Formation::fuzong(){
+	if (shipCount < 4)
+		return;
+	float x = 0;
+	if (shipCount > 4)
+	{
+		x = -10;
+		points[4]->setPosition(x + 30, 10);
+	}
+	if (shipCount == 6)
+		points[5]->setPosition(x + 30, -10);
+		
+	points[0]->setPosition(x+10, 10);
+	points[1]->setPosition(x+10, -10);
+	points[2]->setPosition(x - 10, 10);
+	points[3]->setPosition(x - 10, -10);
+
+}
+void Formation::tixing()
+{
+	if (shipCount < 4)
+		return;
+	int x = 0, y = 0;
+	if (shipCount == 5)
+	{
+		x = 5; 
+		points[4]->setPosition(x - 25, y - 25);
+	}
+	if (shipCount == 6)
+	{
+		points[4]->setPosition(x + 25, y + 25);
+		points[5]->setPosition(x - 25, y - 25);
+	}
+	
+	points[0]->setPosition(x - 5, y - 5);
+	points[1]->setPosition(x + 5, y + 5);
+	points[2]->setPosition(x - 15, y - 15);
+	points[3]->setPosition(x + 15, y + 15);
+}
 void Formation::danheng(){
 	danzong();
-	for (int i = 0; i < points.size(); i++){
-		int x = points[i]->getPosition().x;
-		int y = points[i]->getPosition().y;
-		points[i]->setPosition(y, x);
-	}
+	rotatePoints();
 }
 void Formation::lunxing(){
 	if (shipCount == 6){
@@ -128,4 +181,51 @@ void Formation::lunxing(){
 		points[3]->setPosition(0, 15);
 		points[4]->setPosition(0, -15);
 	}
+}
+void Formation::rotatePoints()
+{
+	for (int i = 0; i < points.size(); i++){
+		int x = points[i]->getPosition().x;
+		int y = points[i]->getPosition().y;
+		points[i]->setPosition(y, x);
+	}
+}
+void Formation::initializePanel(SallyScene *parentSallyScene)
+{
+	this->parentSallyScene = parentSallyScene;
+	panelBg = Sprite::create("SallyMain/image 684.png");
+	panelBg->setZOrder(-1);
+	this->addChild(panelBg);
+	panelBg->setPosition(0, -18);
+	switch (type)
+	{
+	case DanZong:
+		button = MenuItemImage::create("SallyMain/image 692.png",
+			"SallyMain/image 694.png", CC_CALLBACK_1(SallyScene::setFormationCallback, parentSallyScene,DanZong));
+		break;
+	case FuZong:
+		button = MenuItemImage::create("SallyMain/image 697.png",
+			"SallyMain/image 699.png", CC_CALLBACK_1(SallyScene::setFormationCallback, parentSallyScene,FuZong));
+		break;
+	case LunXing:
+		button = MenuItemImage::create("SallyMain/image 702.png",
+			"SallyMain/image 704.png", CC_CALLBACK_1(SallyScene::setFormationCallback, parentSallyScene,LunXing));
+		break;
+	case TiXing:
+		button = MenuItemImage::create("SallyMain/image 707.png",
+			"SallyMain/image 709.png", CC_CALLBACK_1(SallyScene::setFormationCallback, parentSallyScene,TiXing));
+		break;
+	case DanHeng:
+		button = MenuItemImage::create("SallyMain/image 712.png",
+			"SallyMain/image 714.png", CC_CALLBACK_1(SallyScene::setFormationCallback, parentSallyScene,DanHeng));
+		break;
+	default:
+		break;
+	}
+	button->setPosition(0, -67);
+	
+	auto menu = Menu::create(button, NULL);
+	this->addChild(menu);
+	menu->setZOrder(1);
+	menu->setPosition(Point::ZERO);
 }

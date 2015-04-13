@@ -17,8 +17,8 @@
     <Node>
       <index>1</index>
       <type>enemy</type>
-      <positionX>265</positionX>
-      <positionY>285</positionY>
+      <positionX>264</positionX>
+      <positionY>286</positionY>
       <parent>0</parent>
       <arrow>
         <url>image 3.png</url>
@@ -38,8 +38,8 @@
     <Node>
       <index>3</index>
       <type>boss</type>
-      <positionX>340</positionX>
-      <positionY>210</positionY>
+      <positionX>365</positionX>
+      <positionY>215</positionY>
       <parent>1</parent>
       <direction>SE</direction>
       <enemy>LI#DO#DO#HO</enemy>

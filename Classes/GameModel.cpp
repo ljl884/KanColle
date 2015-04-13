@@ -2,7 +2,7 @@
 #include "XMLParser.h"
 
 GameModel * GameModel::instance = NULL;
-
+class GirlFirend;
 GameModel::GameModel()
 {
 
@@ -12,7 +12,7 @@ GameModel::GameModel()
 	{
 		fleets.push_back(new Fleet(i));
 	}
-
+	
 	
 
 }
@@ -31,6 +31,17 @@ int GameModel::getEquipmentId()
 {
 	nextEquipmentId++;
 	return nextEquipmentId;
+}
+bool GameModel::isSaveFileExist()
+{
+	if (!UserDefault::sharedUserDefault()->getBoolForKey("isSaveFileExist"))
+	{
+		UserDefault::sharedUserDefault()->setBoolForKey("isSaveFileExist", true);
+		UserDefault::sharedUserDefault()->flush();
+		return false;
+	}
+	else
+		return true;
 }
 void GameModel::setupInitData()
 {

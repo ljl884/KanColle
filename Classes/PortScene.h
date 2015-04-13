@@ -37,6 +37,7 @@ private:
 	bool init();
 	void layerSwithEffect();
 
+
 private:
 
 	Sprite *black;

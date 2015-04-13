@@ -17,6 +17,7 @@ enum SallyStatus{
 class SallyScene : public Scene{
 public:
 	SallyScene(Mission* mission);
+	void setFormationCallback(Ref* pSender, FormationType formation);
 private:
 
 	SallyStatus status;
@@ -32,15 +33,24 @@ private:
 	Label* bottomLabel;
 	Sprite* temptimer;
 	Sprite* ship;
-private:
+	Sprite *flagShip;
+
+	bool showingBottomPanel;
+
+	Sprite* nodePointShader;
+
+	std::vector<Formation*> formations;
+	void initializeFormationPanel();
+private: 
 	void sallyStart();
 	void sallyMove();
 	void sallyBattle();
 	void sallyFormation();
+	void sallyFinish();
 	void onStatusOverCallBack();
 	void nextStatus(float DelayTime);
-	void setFormationCallback(Ref* pSender, FormationType formation);
-private:
+	
+private://Bottom Panel
 	void hideBottomPanel();
 	void showBottomPanel();
 

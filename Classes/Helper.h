@@ -12,7 +12,7 @@ public:
 	static std::string getString(std::string name);
 	static std::string getShipType(Ship_Type type);
 	static std::string getMissionId(int areaId, int index);
-	static void Helper::split(const std::string& src, const std::string& separator, std::vector<std::string>& dest);
+	static void split(const std::string& src, const std::string& separator, std::vector<std::string>& dest);
 };
 
 
