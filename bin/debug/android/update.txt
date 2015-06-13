@@ -1,8 +1,0 @@
-
-0.1.3 android first version
-0.1.4 added UI fixed resolusion
-0.1.5 fixed fire battle crashing issue
-0.1.6 fixed XMLParser crashing issu
-0.1.7 changed project name & icon
-0.1.8 Foundation of OrganizeLayer
-      GameStartScene
